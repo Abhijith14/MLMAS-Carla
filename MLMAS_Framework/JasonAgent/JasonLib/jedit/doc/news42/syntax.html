@@ -1,0 +1,14 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Syntax Highlighting</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="What's New in jEdit 4.2"><link rel="up" href="user-changes.html" title="Chapter 1. User-Visible Changes"><link rel="previous" href="rect.html" title="Rectangular Editing"><link rel="next" href="search.html" title="Search and Replace"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Syntax Highlighting</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="rect.html">Prev</a> </td><th width="60%" align="center">Chapter 1. User-Visible Changes</th><td width="20%" align="right"> <a accesskey="n" href="search.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="syntax"></a>Syntax Highlighting</h2></div></div><div></div></div><p>
+	  Many new syntax highlighting modes were added, and many existing ones were enhanced. jEdit now supports syntax highlighting for 133 languages.
+	 </p><p>
+	  The following new token types were added:
+	 </p><div class="itemizedlist"><ul type="disc"><li><p>COMMENT3</p></li><li><p>COMMENT4</p></li><li><p>LITERAL3</p></li><li><p>LITERAL4</p></li><li><p>KEYWORD4</p></li></ul></div><p>
+	  Any capture groups defined in the <tt class="literal">SPAN_REGEXP</tt>
+	  element's <tt class="literal">BEGIN</tt> child are now substituted into the <tt class="literal">END</tt> child for matching purposes. This allows here-docs in languages such as Perl to be highlighted correctly.
+	 </p><p>
+	  A new <tt class="literal">NO_ESCAPE</tt> attribute has been added to the <tt class="literal">SPAN</tt> and <tt class="literal">SPAN_REGEXP</tt> elements.
+	 </p><p>
+	  A new <tt class="literal">IMPORT</tt> rule causes the current ruleset to inherit the rules from the given ruleset.
+	 </p><p>
+	  A background color defined for a ruleset's default token type now takes effect on tokens that appear inside this ruleset for which no explicit background color is defined.
+	 </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="rect.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="user-changes.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="search.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Rectangular Editing </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Search and Replace</td></tr></table></div></body></html>

@@ -1,0 +1,37 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>BeanShell Object Management Commands</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="bsh-commands.html" title="Chapter 16. BeanShell Commands"><link rel="previous" href="bsh-commands-script.html" title="Script Execution Commands"><link rel="next" href="bsh-commands-other.html" title="Other Commands"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">BeanShell Object Management Commands</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bsh-commands-script.html">Prev</a> </td><th width="60%" align="center">Chapter 16. BeanShell Commands</th><td width="20%" align="right"> <a accesskey="n" href="bsh-commands-other.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bsh-commands-object"></a>BeanShell Object Management Commands</h2></div></div><div></div></div><div class="itemizedlist"><ul type="disc"><li><div class="funcsynopsis"><p><code class="funcdef"><b class="fsfunc">bind</b>(</code>bsh.This <var class="pdparam">ths</var>, bsh.Namespace <var class="pdparam">namespace</var><code>)</code>;</p></div><p>
+        Binds the scripted object <i class="parameter"><tt>ths</tt></i> to
+        <i class="parameter"><tt>namespace</tt></i>.
+      </p></li><li><div class="funcsynopsis"><p><code class="funcdef">void <b class="fsfunc">clear</b>(</code><code>void)</code>;</p></div><p>
+        Clear all variables, methods, and imports from this namespace.
+        If this namespace is the root, it will be reset to the default
+        imports.
+      </p></li><li><div class="funcsynopsis"><p><code class="funcdef">bsh.This <b class="fsfunc">extend</b>(</code>bsh.This <var class="pdparam">object</var><code>)</code>;</p></div><p>
+        Creates a new BeanShell <tt class="classname">This</tt> scripted object
+        that is a child of the parameter <i class="parameter"><tt>object</tt></i>.
+      </p></li><li><div class="funcsynopsis"><p><code class="funcdef">void <b class="fsfunc">importObject</b>(</code>Object <var class="pdparam">object</var><code>)</code>;</p></div><p>
+        Import an object into this namespace. This is somewhat similar to Java 1.5 static class imports, except you can import the methods and fields of a Java object instance into
+        a BeanShell namespace, for example:
+      </p><div class="informalexample"><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">Map map = new HashMap();
+    importObject( map );
+    put("foo", "bar");
+    print( get("foo") ); // "bar"</pre></td></tr></table></div></li><li><div class="funcsynopsis"><p><code class="funcdef">bsh.This <b class="fsfunc">object</b>(</code><code>void)</code>;</p></div><p>
+        Creates a new BeanShell <tt class="classname">This</tt> scripted object which
+        can hold data members. You can use this to create an object for
+        storing miscellaneous crufties, like so:
+      </p><div class="informalexample"><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">crufties = object();
+crufties.foo = "hello world";
+crufties.counter = 5;
+...</pre></td></tr></table></div></li><li><div class="funcsynopsis"><p><code class="funcdef"><b class="fsfunc">setNameSpace</b>(</code>bsh.Namespace <var class="pdparam">namespace</var><code>)</code>;</p></div><p>
+        Set the namespace of the current scope to
+        <i class="parameter"><tt>namespace</tt></i>.
+      </p></li><li><div class="funcsynopsis"><p><code class="funcdef">bsh.This <b class="fsfunc">super</b>(</code>String <var class="pdparam">scopename</var><code>)</code>;</p></div><p>
+        Returns a reference to the BeanShell <tt class="classname">This</tt>
+        object representing the enclosing method scope specified
+        by <i class="parameter"><tt>scopename</tt></i>.  This method work similar to
+        the <tt class="function">super</tt> keyword but can refer to enclosing
+        scope at higher levels in a hierarchy of scopes.
+      </p></li><li><div class="funcsynopsis"><p><code class="funcdef">void <b class="fsfunc">unset</b>(</code>String <var class="pdparam">name</var><code>)</code>;</p></div><p>
+        Removes the variable named by <i class="parameter"><tt>name</tt></i> from
+        the current interpreter namespace.  This has the effect of
+        &#8220;<span class="quote">undefining</span>&#8221; the variable.
+      </p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bsh-commands-script.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="bsh-commands.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="bsh-commands-other.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Script Execution Commands </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Other Commands</td></tr></table></div></body></html>

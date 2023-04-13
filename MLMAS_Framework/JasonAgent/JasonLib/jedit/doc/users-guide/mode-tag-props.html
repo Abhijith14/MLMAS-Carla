@@ -1,0 +1,90 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>The PROPS Tag</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="writing-modes.html" title="Chapter 10. Mode Definition Syntax"><link rel="previous" href="mode-preamble.html" title="The Preamble and MODE tag"><link rel="next" href="mode-tag-rules.html" title="The RULES Tag"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The PROPS Tag</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mode-preamble.html">Prev</a> </td><th width="60%" align="center">Chapter 10. Mode Definition Syntax</th><td width="20%" align="right"> <a accesskey="n" href="mode-tag-rules.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mode-tag-props"></a>The PROPS Tag</h2></div></div><div></div></div><p>
+   The <tt class="literal">PROPS</tt> tag and the <tt class="literal">PROPERTY</tt> tags
+   inside it are used to define mode-specific
+   properties. Each <tt class="literal">PROPERTY</tt> tag must have a
+   <tt class="literal">NAME</tt> attribute set to the property's name, and a
+   <tt class="literal">VALUE</tt> attribute with the property's value.
+  </p><p>
+   All buffer-local properties listed in <a href="buffer-local.html" title="Buffer-Local Properties">the section called &#8220;Buffer-Local Properties&#8221;</a>
+   may be given values in edit modes.
+  </p><p>
+   The following mode properties specify commenting strings:
+  </p><div class="itemizedlist"><ul type="disc"><li><p><tt class="literal">commentEnd</tt> - the comment end
+   string, used by the <span><b class="guimenuitem">Range Comment</b></span> command.
+   </p></li><li><p><tt class="literal">commentStart</tt> - the comment start
+   string, used by the <span><b class="guimenuitem">Range Comment</b></span> command.
+   </p></li><li><p><tt class="literal">lineComment</tt> - the line comment
+   string, used by the <span><b class="guimenuitem">Line Comment</b></span> command.
+   </p></li></ul></div><p>
+   When performing auto indent, a number of mode properties determine the
+   resulting indent level:
+  </p><div class="itemizedlist"><ul type="disc"><li><p>The line and the one before it are scanned for brackets
+   listed in the <tt class="literal">indentCloseBrackets</tt> and
+   <tt class="literal">indentOpenBrackets</tt> properties.
+   Opening brackets in the previous line increase indent.
+  </p><p>
+   If <tt class="literal">lineUpClosingBracket</tt> is set to <tt class="literal">true</tt>,
+   then closing brackets on the current line will line up with
+   the line containing the matching opening bracket. For example, in Java mode
+   <tt class="literal">lineUpClosingBracket</tt> is set to <tt class="literal">true</tt>,
+   resulting in brackets being indented like so:
+  </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">{
+    // Code
+    {
+        // More code
+    }
+}</pre></td></tr></table><p>
+    If <tt class="literal">lineUpClosingBracket</tt> is set to <tt class="literal">false</tt>,
+    the line <span class="emphasis"><em>after</em></span> a closing bracket will be lined up with
+    the line containing the matching opening bracket. For example, in Lisp mode
+    <tt class="literal">lineUpClosingBracket</tt> is set to <tt class="literal">false</tt>,
+    resulting in brackets being indented like so:
+   </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">(foo 'a-parameter
+    (crazy-p)
+    (bar baz ()))
+(print "hello world")</pre></td></tr></table></li><li><p>If the previous line contains no opening brackets, or if the
+     <tt class="literal">doubleBracketIndent</tt> property is set to <tt class="literal">true</tt>,
+     the previous line is checked against the regular expressions in the
+     <tt class="literal">indentNextLine</tt> and <tt class="literal">indentNextLines</tt>
+     properties. If the previous line matches the former, the indent of the
+     current line is increased and the subsequent line is shifted back again.
+     If the previous line matches the latter, the indent of the current
+     and subsequent lines is increased.
+    </p><p>
+     In Java mode, for example, the <tt class="literal">indentNextLine</tt>
+     property is set to match control structures such as &#8220;<span class="quote">if</span>&#8221;,
+     &#8220;<span class="quote">else</span>&#8221;, &#8220;<span class="quote">while</span>&#8221;, and so on.
+    </p><p>
+     The
+     <tt class="literal">doubleBracketIndent</tt> property, if set to the default of
+     <tt class="literal">false</tt>, results in code indented like so:
+    </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">while(objects.hasNext())
+{
+    Object next = objects.hasNext();
+    if(next instanceof Paintable)
+        next.paint(g);
+}</pre></td></tr></table><p>
+     On the other hand, settings this property to &#8220;<span class="quote">true</span>&#8221; will
+     give the following result:
+   </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">while(objects.hasNext())
+    {
+        Object next = objects.hasNext();
+        if(next instanceof Paintable)
+            next.paint(g);
+    }</pre></td></tr></table></li></ul></div><p>
+   Here is the complete <tt class="literal">&lt;PROPS&gt;</tt> tag for Java mode:
+  </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">&lt;PROPS&gt;
+    &lt;PROPERTY NAME="commentStart" VALUE="/*" /&gt;
+    &lt;PROPERTY NAME="commentEnd" VALUE="*/" /&gt;
+    &lt;PROPERTY NAME="lineComment" VALUE="//" /&gt;
+    &lt;PROPERTY NAME="wordBreakChars" VALUE=",+-=&amp;lt;&amp;gt;/?^&amp;amp;*" /&gt;
+
+    &lt;!-- Auto indent --&gt;
+    &lt;PROPERTY NAME="indentOpenBrackets" VALUE="{" /&gt;
+    &lt;PROPERTY NAME="indentCloseBrackets" VALUE="}" /&gt;
+    &lt;PROPERTY NAME="indentNextLine"
+    	VALUE="\s*(((if|while)\s*\(|else\s*|else\s+if\s*\(|for\s*\(.*\))[^{;]*)" /&gt;
+    &lt;!-- set this to 'true' if you want to use GNU coding style --&gt;
+    &lt;PROPERTY NAME="doubleBracketIndent" VALUE="false" /&gt;
+    &lt;PROPERTY NAME="lineUpClosingBracket" VALUE="true" /&gt;
+&lt;/PROPS&gt;</pre></td></tr></table></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mode-preamble.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="writing-modes.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="mode-tag-rules.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">The Preamble and MODE tag </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> The RULES Tag</td></tr></table></div></body></html>

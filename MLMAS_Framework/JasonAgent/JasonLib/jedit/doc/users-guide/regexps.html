@@ -1,0 +1,54 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Appendix E. Regular Expressions</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="using-jedit-part.html" title="Part I. Using jEdit"><link rel="previous" href="globs.html" title="Appendix D. Glob Patterns"><link rel="next" href="macro-index.html" title="Appendix F. Macros Included With jEdit"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix E. Regular Expressions</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="globs.html">Prev</a> </td><th width="60%" align="center">Part I. Using jEdit</th><td width="20%" align="right"> <a accesskey="n" href="macro-index.html">Next</a></td></tr></table><hr></div><div class="appendix" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="regexps"></a>Appendix E. Regular Expressions</h2></div></div><div></div></div><p>
+  jEdit uses regular expressions to implement inexact search and replace.
+  A regular expression consists of a string where some
+  characters are given special meaning with regard to pattern matching.
+ </p><p>
+  Within a regular expression, the following characters have special meaning:
+ </p><h3><a name="id2620680"></a>Positional Operators</h3><div class="itemizedlist"><ul type="disc"><li><p><tt class="literal">^</tt> matches at the beginning of a line</p></li><li><p><tt class="literal">$</tt> matches at the end of a line</p></li><li><p><tt class="literal">\b</tt> matches at a word break</p></li><li><p><tt class="literal">\B</tt> matches at a non-word break</p></li><li><p><tt class="literal">\&lt;</tt> matches at the start of a word</p></li><li><p><tt class="literal">\&gt;</tt> matches at the end of a word</p></li></ul></div><h3><a name="id2621287"></a>One-Character Operators</h3><div class="itemizedlist"><ul type="disc"><li><p><tt class="literal">.</tt> matches any single character</p></li><li><p><tt class="literal">\d</tt> matches any decimal digit</p></li><li><p><tt class="literal">\D</tt> matches any non-digit</p></li><li><p><tt class="literal">\n</tt> matches the newline character</p></li><li><p><tt class="literal">\s</tt> matches any whitespace character</p></li><li><p><tt class="literal">\S</tt> matches any non-whitespace character</p></li><li><p><tt class="literal">\t</tt> matches a horizontal tab character</p></li><li><p><tt class="literal">\w</tt> matches any word (alphanumeric) character</p></li><li><p><tt class="literal">\W</tt> matches any non-word (alphanumeric)
+  character</p></li><li><p><tt class="literal">\\</tt> matches the backslash
+  (&#8220;<span class="quote">\</span>&#8221;) character</p></li></ul></div><h3><a name="id2623096"></a>Character Class Operator</h3><div class="itemizedlist"><ul type="disc"><li><p><tt class="literal">[<i class="replaceable"><tt>abc</tt></i>]</tt> matches
+  any character in
+  the set <i class="replaceable"><tt>a</tt></i>, <i class="replaceable"><tt>b</tt></i> or
+  <i class="replaceable"><tt>c</tt></i></p></li><li><p><tt class="literal">[^<i class="replaceable"><tt>abc</tt></i>]</tt> matches
+  any character not
+  in the set <i class="replaceable"><tt>a</tt></i>, <i class="replaceable"><tt>b</tt></i> or
+  <i class="replaceable"><tt>c</tt></i></p></li><li><p><tt class="literal">[<i class="replaceable"><tt>a-z</tt></i>]</tt> matches
+  any character in the
+  range <i class="replaceable"><tt>a</tt></i> to <i class="replaceable"><tt>z</tt></i>, inclusive.
+  A leading or trailing dash will be interpreted literally</p></li><li><p><tt class="literal">[[:alnum:]]</tt> matches any alphanumeric
+  character</p></li><li><p><tt class="literal">[[:alpha:]]</tt> matches any alphabetical character</p></li><li><p><tt class="literal">[[:blank:]]</tt> matches a space or horizontal tab</p></li><li><p><tt class="literal">[[:cntrl:]]</tt> matches a control character</p></li><li><p><tt class="literal">[[:digit:]]</tt> matches a decimal digit</p></li><li><p><tt class="literal">[[:graph:]]</tt> matches a non-space, non-control character</p></li><li><p><tt class="literal">[[:lower:]]</tt> matches a lowercase letter</p></li><li><p><tt class="literal">[[:print:]]</tt> same as <tt class="literal">[[:graph:]]</tt>, but also space and tab</p></li><li><p><tt class="literal">[[:punct:]]</tt> matches a punctuation character</p></li><li><p><tt class="literal">[[:space:]]</tt> matches any whitespace character, including newlines</p></li><li><p><tt class="literal">[[:upper:]]</tt> matches an uppercase letter</p></li><li><p><tt class="literal">[[:xdigit:]]</tt> matches a valid hexadecimal digit</p></li></ul></div><h3><a name="id2623282"></a>Subexpressions and Backreferences</h3><div class="itemizedlist"><ul type="disc"><li><p><tt class="literal">(<i class="replaceable"><tt>abc</tt></i>)</tt> matches
+  whatever the expression
+  <i class="replaceable"><tt>abc</tt></i> would match, and saves it as a subexpression.
+  Also used for grouping</p></li><li><p><tt class="literal">(?:<i class="replaceable"><tt>...</tt></i>)</tt> pure
+  grouping operator, does not
+  save contents</p></li><li><p><tt class="literal">(?#<i class="replaceable"><tt>...</tt></i>)</tt> embedded
+  comment, ignored by engine</p></li><li><p><tt class="literal">(?=<i class="replaceable"><tt>...</tt></i>)</tt> positive
+  lookahead; the regular expression will match if the text in the brackets
+  matches, but that text will not be considered part of the match</p></li><li><p><tt class="literal">(?!<i class="replaceable"><tt>...</tt></i>)</tt> negative
+  lookahead; the regular expression will match if the text in the brackets
+  does not
+  match, and that text will not be considered part of the match</p></li><li><p><tt class="literal">\<i class="replaceable"><tt>n</tt></i></tt> where 0 &lt;
+  <i class="replaceable"><tt>n</tt></i> &lt; 10,
+  matches the same thing the <i class="replaceable"><tt>n</tt></i>th
+  subexpression matched. Can only be used in the search string</p></li><li><p><tt class="literal">$<i class="replaceable"><tt>n</tt></i></tt> where 0 &lt;
+  <i class="replaceable"><tt>n</tt></i> &lt; 10,
+  substituted with the text matched by the <i class="replaceable"><tt>n</tt></i>th
+  subexpression. Can only be used in the replacement string</p></li></ul></div><h3><a name="id2623392"></a>Branching (Alternation) Operator</h3><div class="itemizedlist"><ul type="disc"><li><p><tt class="literal"><i class="replaceable"><tt>a</tt></i>|<i class="replaceable"><tt>b</tt></i></tt>
+  matches whatever the expression <i class="replaceable"><tt>a</tt></i> would match, or whatever
+  the expression <i class="replaceable"><tt>b</tt></i> would match.</p></li></ul></div><h3><a name="id2623422"></a>Repeating Operators</h3><p>
+  These symbols operate on the previous atomic expression.
+ </p><div class="itemizedlist"><ul type="disc"><li><p><tt class="literal">?</tt> matches the preceding expression or the
+  null string</p></li><li><p><tt class="literal">*</tt> matches the null string or any number of repetitions
+  of the preceding expression</p></li><li><p><tt class="literal">+</tt> matches one or more repetitions of the preceding
+  expression</p></li><li><p><tt class="literal">{<i class="replaceable"><tt>m</tt></i>}</tt> matches exactly
+  <i class="replaceable"><tt>m</tt></i>
+  repetitions of the one-character expression</p></li><li><p><tt class="literal">{<i class="replaceable"><tt>m</tt></i>,<i class="replaceable"><tt>n</tt></i>}</tt>
+  matches between
+  <i class="replaceable"><tt>m</tt></i> and <i class="replaceable"><tt>n</tt></i> repetitions of the preceding
+  expression, inclusive</p></li><li><p><tt class="literal">{<i class="replaceable"><tt>m</tt></i>,}</tt> matches
+  <i class="replaceable"><tt>m</tt></i> or more
+  repetitions of the preceding expression</p></li></ul></div><h3><a name="id2623517"></a>Stingy (Minimal) Matching</h3><p>
+  If a repeating operator (above) is immediately followed by a
+  <tt class="literal">?</tt>, the repeating operator will stop at the smallest
+  number of repetitions that can complete the rest of the match.
+ </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="globs.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="using-jedit-part.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="macro-index.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Appendix D. Glob Patterns </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Appendix F. Macros Included With jEdit</td></tr></table></div></body></html>

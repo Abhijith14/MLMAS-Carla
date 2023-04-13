@@ -1,0 +1,64 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Markers</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="editing.html" title="Chapter 5. Editing Text"><link rel="previous" href="text-transfer.html" title="Transferring Text"><link rel="next" href="search-replace.html" title="Search and Replace"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Markers</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="text-transfer.html">Prev</a> </td><th width="60%" align="center">Chapter 5. Editing Text</th><td width="20%" align="right"> <a accesskey="n" href="search-replace.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="markers"></a>Markers</h2></div></div><div></div></div><p>
+   A <i class="firstterm">marker</i> is a pointer to a specific location within
+   a buffer, which may or may not have a single-character <i class="firstterm">shortcut</i> associated with it.
+   Markers are persistent; they are saved to
+   <tt class="filename">.<i class="replaceable"><tt>filename</tt></i>.marks</tt>, where
+   <tt class="filename"><i class="replaceable"><tt>filename</tt></i></tt> is the name of the
+   buffer. (The dot prefix
+   makes the markers file hidden on Unix systems.) Marker
+   saving can be
+   disabled in the <span><b class="guibutton">General</b></span> pane of the
+   <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>
+   dialog box; see <a href="global-opts.html#general-pane" title="The General Pane">the section called &#8220;The General Pane&#8221;</a>.
+  </p><p>
+   <span><b class="guimenu">Markers</b></span>&gt;<span><b class="guimenuitem">Add/Remove Marker</b></span>
+   (shortcut: <tt class="keycap">C+e C+m</tt>) adds a
+   marker without a shortcut pointing to the current line. If a marker is
+   already set on the current line, the marker is removed instead.
+   If text is selected,
+   markers are added to the first and last line of each selection.
+  </p><p>
+   Markers are listed in the <span><b class="guimenu">Markers</b></span> menu; selecting a marker
+   from this menu will move the caret to its location.
+  </p><p>
+   <span><b class="guimenu">Markers</b></span>&gt;<span><b class="guimenuitem">Go to Previous
+   Marker</b></span>
+   (shortcut: <tt class="keycap">C+e C+COMMA</tt>) goes
+   to the marker immediately before the caret position.
+  </p><p>
+   <span><b class="guimenu">Markers</b></span>&gt;<span><b class="guimenuitem">Go to Next Marker</b></span>
+   (shortcut: <tt class="keycap">C+e C+PERIOD</tt>)
+   goes to the marker immediately after the caret position.
+  </p><p>
+   <span><b class="guimenu">Markers</b></span>&gt;<span><b class="guimenuitem">Remove All Markers</b></span>
+   removes all markers set in the current buffer.
+  </p><p>Markers with shortcuts allow for quicker keyboard-based navigation.
+   The following commands all prompt for a single-character shortcut when
+   invoked. Pressing <tt class="keycap">ESCAPE</tt>
+   instead of specifying a shortcut will cancel the operation.
+  </p><p>
+   <span><b class="guimenu">Markers</b></span>&gt;<span><b class="guimenuitem">Add Marker With
+   Shortcut</b></span>
+   (shortcut: <tt class="keycap">C+t <i class="replaceable"><tt>key</tt></i></tt>) adds a marker with the
+   specified shortcut. If marker with that shortcut
+   already exists, it will remain in the buffer but lose its shortcut.
+  </p><p>
+   <span><b class="guimenu">Markers</b></span>&gt;<span><b class="guimenuitem">Go to Marker</b></span>
+   (shortcut: <tt class="keycap">C+y <i class="replaceable"><tt>key</tt></i></tt>) moves the caret to
+   the location of the marker with the specified shortcut.
+  </p><p>
+   <span><b class="guimenu">Markers</b></span>&gt;<span><b class="guimenuitem">Select to Marker</b></span>
+   (shortcut: <tt class="keycap">C+u <i class="replaceable"><tt>key</tt></i></tt>) creates a selection from
+   the caret location to the marker with the specified shortcut.
+  </p><p>
+   <span><b class="guimenu">Markers</b></span>&gt;<span><b class="guimenuitem">Swap Caret and
+   Marker</b></span> (shortcut: <tt class="keycap">C+k <i class="replaceable"><tt>key</tt></i></tt>)
+   moves the caret to the location of the marker with the specified shortcut,
+   and moves the marker to the former caret position. Invoke
+   this command multiple times to flip between two locations in the buffer.
+  </p><p>
+   Lines which contain markers are indicated in the gutter with a highlight.
+   Moving the mouse over the highlight displays a tool tip showing the marker's
+   shortcut, if it has one. See <a href="overview.html" title="Interface Overview">the section called &#8220;Interface Overview&#8221;</a> for information
+   about the gutter.
+  </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="text-transfer.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="editing.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="search-replace.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Transferring Text </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Search and Replace</td></tr></table></div></body></html>

@@ -1,0 +1,37 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Opening Files</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="files.html" title="Chapter 4. Working With Files"><link rel="previous" href="creating.html" title="Creating New Files"><link rel="next" href="saving.html" title="Saving Files"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Opening Files</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="creating.html">Prev</a> </td><th width="60%" align="center">Chapter 4. Working With Files</th><td width="20%" align="right"> <a accesskey="n" href="saving.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="opening"></a>Opening Files</h2></div></div><div></div></div><p>
+   <span><b class="guimenu">File</b></span>&gt;<span><b class="guimenuitem">Open</b></span> (shortcut: <tt class="keycap">C+o</tt>) displays
+   a file system browser dialog box and loads the specified file into a new
+   buffer.
+  </p><p>
+   Multiple files can be opened at once by holding down
+   <tt class="keycap">Control</tt> while clicking on them in the file system browser.
+   The file system browser supports auto-completion;
+   typing the first few characters of a listed file name will select the
+   file.
+  </p><p>
+   More advanced features of the file system browser are described in
+   <a href="vfs-browser.html" title="The File System Browser">the section called &#8220;The File System Browser&#8221;</a>.
+  </p><p>
+   The <span><b class="guimenu">File</b></span>&gt;<span><b class="guimenuitem">Recent Files</b></span> menu
+   lists recently viewed files. When a recent file is opened, the caret
+   is automatically moved to its previous location in that file.
+   The number of recent files to remember can be changed and caret
+   position saving can be disabled in the <span><b class="guibutton">General</b></span> pane of
+   the <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>
+   dialog box; see <a href="global-opts.html#general-pane" title="The General Pane">the section called &#8220;The General Pane&#8221;</a>.
+  </p><p>
+   The <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Current Directory</b></span>
+   menu lists all files and directories in the current buffer's directory.
+   Selecting a file opens it in a buffer for editing; selecting a directory
+   opens it in the file system browser (see <a href="vfs-browser.html" title="The File System Browser">the section called &#8220;The File System Browser&#8221;</a>).
+  </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+    Files that you do not have write access to are opened in read-only
+    mode, where editing is not permitted.
+   </p></div><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Tip</h3><p>
+    jEdit supports transparent editing of GZipped files; if a file begins with
+    the GZip &#8220;<span class="quote">magic number</span>&#8221;, it is automatically decompressed
+    before loading and compressed when saving. To compress an existing file,
+    you need to change a setting in the
+    <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Buffer Options</b></span>
+    dialog box; see <a href="buffer-opts.html" title="The Buffer Options Dialog Box">the section called &#8220;The Buffer Options Dialog Box&#8221;</a> for details.
+   </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="creating.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="files.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="saving.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Creating New Files </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Saving Files</td></tr></table></div></body></html>

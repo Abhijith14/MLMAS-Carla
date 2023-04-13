@@ -1,0 +1,89 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>
+
+How Plugins are Loaded</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="plugin-implement.html" title="Chapter 18. Implementing a Simple Plugin"><link rel="previous" href="plugin-implement.html" title="Chapter 18. Implementing a Simple Plugin"><link rel="next" href="plugin-implement-quicknotepadplugin.html" title="The QuickNotepadPlugin Class"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">
+
+How Plugins are Loaded</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="plugin-implement.html">Prev</a> </td><th width="60%" align="center">Chapter 18. Implementing a Simple Plugin</th><td width="20%" align="right"> <a accesskey="n" href="plugin-implement-quicknotepadplugin.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="plugin-load"></a>
+<a class="indexterm" name="id2649022"></a>
+How Plugins are Loaded</h2></div></div><div></div></div><p>
+	We will
+  discuss the implementation of the <span class="application">QuickNotepad</span>
+  plugin, along with the jEdit APIs
+  it makes use of. But first, we describe how plugins are loaded.
+</p><p>
+  As part of its startup routine, jEdit's <tt class="function">main</tt>
+  method calls various methods to load and initialize plugins.
+</p><p>
+  Additionally, plugins using the new jEdit 4.2 plugin API can be 
+  loaded and unloaded at any time. This is a great help when 
+  developing your own plugins -- there is no need to restart the 
+  editor after making changes (see <a href="plugin-implement-reloading.html" title="Reloading the Plugin">the section called &#8220;Reloading the Plugin&#8221;</a> ).
+</p><p>
+  Note that plugins using the older jEdit 4.1 API are still only loaded on editor startup, and unloaded on editor exit. The jEdit 4.1 API is deprecated and will not be described in this guide.
+</p><p>
+  Plugins are loaded from files with the <tt class="filename">.jar</tt>
+  filename extension located in the <tt class="filename">jars</tt>
+  subdirectories of the jEdit installation and user settings directories
+  (see <a href="settings-directory.html" title="The jEdit Settings Directory">the section called &#8220;The jEdit Settings Directory&#8221;</a>).
+</p><p>
+  For each JAR archive file it finds, jEdit scans its entries and
+  performs the following tasks:
+</p><div class="itemizedlist"><ul type="disc"><li><p>
+   Adds to a collection maintained by jEdit a new object of
+   type <a href="../api/org/gjt/sp/jedit/PluginJAR.html" target="_top">
+   <tt class="classname">PluginJAR</tt></a>. This is a data structure
+   holding the name of the JAR archive file, a reference to the
+   <a href="../api/org/gjt/sp/jedit/JARClassLoader.html" target="_top">
+   <tt class="classname">JARClassLoader</tt></a>, and a collection
+   of plugins found in the archive file.
+  </p></li><li><p>
+    Loads any properties defined in files ending with
+    the extension <tt class="filename">.props</tt> that are contained
+    in the archive. See <a href="plugin-implement-properties.html" title="The Property File">the section called &#8220;The Property File&#8221;</a>.
+  </p></li><li><p>
+    Reads action definitions from any file named
+    <tt class="filename">actions.xml</tt> in the archive (the file need
+    not be at the top level). See <a href="plugin-implement-actions.html" title="The Action Catalog">the section called &#8220;The Action Catalog&#8221;</a>.
+  </p></li><li><p>
+    Parses and loads the contents of any file named
+    <tt class="filename">dockables.xml</tt> in the archive (the file need
+    not be at the top level). This file contains BeanShell code for
+    creating docking or floating windows that will contain the visible
+    components of the plugin.  Not all plugins define dockable
+    windows,
+    but those that do need a <tt class="filename">dockables.xml</tt> file.
+    See <a href="plugin-implement-dockables.html" title="The Dockable Window Catalog">the section called &#8220;The Dockable Window Catalog&#8221;</a>.
+  </p></li><li><p>
+    Checks for a class name with a name ending with
+    <tt class="filename">Plugin.class</tt>.
+  </p><p>
+    Such a class is known as a <i class="firstterm">plugin core class</i> and must
+    extend jEdit's abstract
+    <a href="../api/org/gjt/sp/jedit/EditPlugin.html" target="_top">
+    <tt class="classname">EditPlugin</tt></a>
+    class. The initialization routine checks the plugin's
+    properties to see if it is subject to any dependencies. For example, a
+    plugin may require that the version of the Java runtime environment or
+    of jEdit itself be equal to or above some threshold version. A plugin
+    can also require the presence of another plugin.
+  </p><p>
+    If any dependency is
+    not satisfied, the loader marks the plugin as &#8220;<span class="quote">broken</span>&#8221; and
+    logs an error message.
+  </p></li></ul></div><p>
+  After scanning the plugin JAR file and loading any resources,
+  a new instance
+  of the plugin core class is created and added to the collection
+  maintained by the appropriate <a href="../api/org/gjt/sp/jedit/PluginJAR.html" target="_top">
+  <tt class="classname">PluginJAR</tt></a>.
+  jEdit then calls the
+  <tt class="function">start()</tt> method of the plugin core class.
+  The <tt class="function">start()</tt> method can perform initialization of the
+  object's data members.
+  Because this method is defined as an empty &#8220;<span class="quote">no-op</span>&#8221; in the
+  <a href="../api/org/gjt/sp/jedit/EditPlugin.html" target="_top">
+  <tt class="classname">EditPlugin</tt></a> abstract class, a plugin need not
+  provide an implementation if no unique initialization is required.
+</p><div class="sidebar"><p class="title"><b>Updating 4.1 plugins</b></p><p>
+ Note that while jEdit 4.1 plugins were only loaded on startup, jEdit 4.2 plugins can be loaded at any time. As a result, the <tt class="function">start()</tt> method needs to cope with being called at any time, and <tt class="function">stop()</tt> needs to fully clean up after the plugin. See the API documentation for the <a href="../api/org/gjt/sp/jedit/EditPlugin.html" target="_top">
+  <tt class="classname">EditPlugin</tt></a> class for details.
+ </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="plugin-implement.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="plugin-implement.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="plugin-implement-quicknotepadplugin.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 18. Implementing a Simple Plugin </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> The QuickNotepadPlugin Class</td></tr></table></div></body></html>

@@ -1,0 +1,56 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Bracket Matching</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="source-edit.html" title="Chapter 6. Editing Source Code"><link rel="previous" href="commenting.html" title="Commenting Out Code"><link rel="next" href="abbrevs.html" title="Abbreviations"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Bracket Matching</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="commenting.html">Prev</a> </td><th width="60%" align="center">Chapter 6. Editing Source Code</th><td width="20%" align="right"> <a accesskey="n" href="abbrevs.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bracket-matching"></a>Bracket Matching</h2></div></div><div></div></div><p>
+   Misplaced and unmatched brackets are one of the most common syntax
+   errors encountered when writing code. jEdit has several features
+   to make brackets easier to deal with.
+  </p><p>
+   Positioning the caret immediately after a bracket will highlight the
+   corresponding closing or opening bracket (assuming it is visible),
+   and draw a scope indicator in the gutter. If the highlighted bracket is
+   not visible, the text of the matching line will be shown in the status
+   bar. If the matching line consists of only whitespace and the bracket
+   itself, the <span class="emphasis"><em>previous line</em></span> is shown instead. This
+   feature is very useful when your code is indented as follows, with braces
+   on their own lines:
+  </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">public void someMethod()
+{
+    if(isOK)
+    {
+        doSomething();
+    }
+}</pre></td></tr></table><p>
+   Invoking
+   <span><b class="guimenu">Edit</b></span>&gt;<span><b class="guisubmenu">Source</b></span>&gt;<span><b class="guimenuitem">Go
+   to Matching
+   Bracket</b></span> (shortcut: <tt class="keycap">C+]</tt>) or
+   clicking the scope indicator in the gutter moves the caret to the
+   matching bracket.
+  </p><p>
+   <span><b class="guimenu">Edit</b></span>&gt;<span><b class="guisubmenu">Source</b></span>&gt;<span><b class="guimenuitem">Select
+   Code Block</b></span>
+   (shortcut: <tt class="keycap">C+[</tt>)
+   selects all text between the closest two brackets surrounding the caret.
+  </p><p>
+   Holding down <tt class="keycap">Control</tt> while clicking the scope indicator
+   in the gutter or a bracket in the text area will select all text
+   between the two matching brackets.
+  </p><p>
+   <span><b class="guimenu">Edit</b></span>&gt;<span><b class="guisubmenu">Source</b></span>&gt;<span><b class="guimenuitem">Go
+   to Previous Bracket</b></span> (shortcut: <tt class="keycap">C+e C+[</tt>)
+   moves the
+   caret to the previous opening bracket.
+  </p><p>
+   <span><b class="guimenu">Edit</b></span>&gt;<span><b class="guisubmenu">Source</b></span>&gt;<span><b class="guimenuitem">Go
+   to Next Bracket</b></span> (shortcut: <tt class="keycap">C+e C+]</tt>)
+   moves the caret to the next closing bracket.
+  </p><p>
+   Bracket highlighting in the text area and bracket scope display in the
+   gutter can be customized in the
+   <span><b class="guibutton">Text Area</b></span> and <span><b class="guibutton">Gutter</b></span> panes of the
+   <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>
+   dialog box; see <a href="global-opts.html" title="The Global Options Dialog Box">the section called &#8220;The Global Options Dialog Box&#8221;</a>.
+  </p><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Tip</h3><p>
+    jEdit's bracket matching algorithm only checks syntax tokens with the same
+    type as the original bracket, so for example unmatched brackets inside string
+    literals and comments will be skipped when matching brackets that are part of
+    program syntax.
+   </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="commenting.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="source-edit.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="abbrevs.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Commenting Out Code </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Abbreviations</td></tr></table></div></body></html>

@@ -1,0 +1,55 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Working With Words</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="editing.html" title="Chapter 5. Editing Text"><link rel="previous" href="undo-redo.html" title="Undo and Redo"><link rel="next" href="lines.html" title="Working With Lines"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Working With Words</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="undo-redo.html">Prev</a> </td><th width="60%" align="center">Chapter 5. Editing Text</th><td width="20%" align="right"> <a accesskey="n" href="lines.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="words"></a>Working With Words</h2></div></div><div></div></div><p>
+   <tt class="keycap">C+LEFT</tt> and <tt class="keycap">C+RIGHT</tt>
+   move the caret a word at
+   a time. Holding down <tt class="keycap">Shift</tt> in addition to the above
+   extends the selection a word at a time.
+  </p><p>
+   A single word can be selected by double-clicking with the mouse,
+   or using the
+   <span><b class="guimenu">Edit</b></span>&gt;<span><b class="guisubmenu">More
+   Selection</b></span>&gt;<span><b class="guimenuitem">Select
+   Word</b></span> command (shortcut: <tt class="keycap">C+e w</tt>).
+   A selection that begins and ends on word boundaries can be created by
+   double-clicking and dragging.
+  </p><p>
+   <tt class="keycap">C+BACKSPACE</tt> and <tt class="keycap">C+DELETE</tt>
+   delete the word
+   before or after the caret, respectively.
+  </p><p>
+   <span><b class="guimenu">Edit</b></span>&gt;<span><b class="guimenuitem">Complete Word</b></span> (shortcut: <tt class="keycap">C+b</tt>) locates
+   possible completions for the word at the caret, first by looking in the
+   current edit mode's syntax highlighting
+   keyword list, and then in the current buffer for words that begin with the
+   word at the caret. This serves as a very basic code completion feature.
+  </p><p>
+   If there is only one completion, it will be inserted into the buffer
+   immediately.
+  </p><p>
+   If multiple completions were found, the longest common prefix is inserted into the buffer, and a popup is shown below
+   the caret position listing the completions.
+  </p><p>
+   To insert a completion from the list, either select it using the <tt class="keycap">UP</tt> and <tt class="keycap">DOWN</tt> keys and
+   press <tt class="keycap">ENTER</tt>, press a digit to insert one of the first
+   ten completions (1 is the first completion; 9 is the 9th; 0 is the 10th),
+   or click the desired completion with the mouse. To close the popup without inserting a
+   completion, press <tt class="keycap">ESCAPE</tt>.
+  </p><p>
+   Typing while the popup is
+   visible will automatically update the popup and narrow the set of
+   completions as necessary.
+  </p><p>
+   <span><b class="guimenu">Edit</b></span>&gt;<span><b class="guimenuitem">Word Count</b></span>
+   displays a dialog box with the number of characters,
+   words and lines in the current buffer.
+  </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2598347"></a>What's a Word?</h3></div></div><div></div></div><p>
+    The default behavior of the
+    <tt class="keycap">C+LEFT</tt>,
+    <tt class="keycap">C+RIGHT</tt>,
+    <tt class="keycap">C+BACKSPACE</tt> and <tt class="keycap">C+DELETE</tt> commands is to
+    stop both at the beginning and the end of each word. However this can be
+    changed by remapping these keystrokes to alternative actions whose names end
+    with <span><b class="guimenuitem">(Eat Whitespace)</b></span> in the
+    <span><b class="guibutton">Shortcuts</b></span> pane of the
+    <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>
+    dialog box; see <a href="global-opts.html#shortcuts-pane" title="The Shortcuts Pane">the section called &#8220;The Shortcuts Pane&#8221;</a>.
+   </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="undo-redo.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="editing.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="lines.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Undo and Redo </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Working With Lines</td></tr></table></div></body></html>

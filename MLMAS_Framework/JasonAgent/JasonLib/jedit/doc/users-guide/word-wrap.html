@@ -1,0 +1,47 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Wrapping Long Lines</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="editing.html" title="Chapter 5. Editing Text"><link rel="previous" href="paragraphs.html" title="Working With Paragraphs"><link rel="next" href="scrolling.html" title="Scrolling"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Wrapping Long Lines</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="paragraphs.html">Prev</a> </td><th width="60%" align="center">Chapter 5. Editing Text</th><td width="20%" align="right"> <a accesskey="n" href="scrolling.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="word-wrap"></a>Wrapping Long Lines</h2></div></div><div></div></div><p>
+   The <i class="firstterm">word wrap</i> feature splits lines at word
+   boundaries in
+   order to fit text within a specified wrap margin.
+   The wrap margin
+   position is indicated in the text are as a faint blue vertical line.
+   There are two &#8220;<span class="quote">wrap modes</span>&#8221;, &#8220;<span class="quote">soft</span>&#8221; and
+   &#8220;<span class="quote">hard</span>&#8221;; they are described below. The current wrap mode is shown in the status bar; see <a href="status-bar.html" title="The Status Bar">the section called &#8220;The Status Bar&#8221;</a>. The wrap mode can be
+   changed in one of the following ways:
+  </p><div class="itemizedlist"><ul type="disc"><li><p>On a global or mode-specific
+   basis in the
+   <span><b class="guibutton">Editing</b></span> pane
+   of the <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>
+   dialog box. See <a href="global-opts.html#editing-pane" title="The Editing Pane">the section called &#8220;The Editing Pane&#8221;</a>.</p></li><li><p>In the current buffer
+   for the duration of the editing session,</p><div class="itemizedlist"><ul type="circle"><li><p>By clicking the status bar indicator.</p></li><li><p>In the
+   <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Buffer Options</b></span>
+   dialog box. See <a href="buffer-opts.html" title="The Buffer Options Dialog Box">the section called &#8220;The Buffer Options Dialog Box&#8221;</a>.</p></li><li><p>From the keyboard, if a keyboard shortcut has been assigned to the <span><b class="guimenuitem">Toggle Word Wrap</b></span> command in the <span><b class="guibutton">Shortcuts</b></span> pane of the
+     <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>
+     dialog box. By default, this command does not have a keyboard shortcut.</p></li></ul></div></li><li><p>In the current buffer
+   for future editing sessions by placing
+   the following in one of the first or last 10 lines of the buffer, where
+   <i class="replaceable"><tt>mode</tt></i> is either &#8220;<span class="quote">none</span>&#8221;, &#8220;<span class="quote">soft</span>&#8221; or
+   &#8220;<span class="quote">hard</span>&#8221;, and
+   <i class="replaceable"><tt>column</tt></i> is the desired wrap margin:
+   </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="screen">:wrap=<i class="replaceable"><tt>mode</tt></i>:maxLineLen=<i class="replaceable"><tt>column</tt></i>:</pre></td></tr></table></li></ul></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2599147"></a>Soft Wrap</h3></div></div><div></div></div><p>
+    In soft wrap mode, lines are automatically wrapped when displayed on screen.
+    Newlines are not inserted at the wrap positions, and the wrapping is
+    automatically updated when text is inserted or removed.
+   </p><p>
+    If end of line markers are enabled in the <span><b class="guibutton">Text Area</b></span>
+    pane of the <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>
+    dialog box, a colon (&#8220;<span class="quote">:</span>&#8221;) is painted at the end of wrapped lines. See <a href="global-opts.html#text-area-pane" title="The Text Area Pane">the section called &#8220;The Text Area Pane&#8221;</a>.
+   </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2599185"></a>Hard Wrap</h3></div></div><div></div></div><p>
+    In hard wrap mode,
+    inserting text at the end of a line will automatically break the line if
+    it extends beyond the wrap margin. Inserting or removing text in the middle
+    of a line has no effect, however text can be re-wrapped using the
+    <span><b class="guimenu">Edit</b></span>&gt;<span><b class="guisubmenu">Text</b></span>&gt;<span><b class="guimenuitem">Format
+    Paragraph</b></span> command. See <a href="paragraphs.html" title="Working With Paragraphs">the section called &#8220;Working With Paragraphs&#8221;</a>.
+   </p><p>
+    Hard wrap is implemented using character offsets, not screen
+    positions, so it might not behave like you expect if a
+    proportional-width font is being used. The text area font can be changed in the
+    <span><b class="guibutton">Text Area</b></span> pane of the
+    <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>
+    dialog box.
+   </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="paragraphs.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="editing.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="scrolling.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Working With Paragraphs </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Scrolling</td></tr></table></div></body></html>

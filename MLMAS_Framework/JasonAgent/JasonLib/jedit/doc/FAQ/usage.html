@@ -1,0 +1,489 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Usage Questions</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit Frequently Asked Questions"><link rel="up" href="index.html" title="jEdit Frequently Asked Questions"><link rel="previous" href="installation.html" title="Installation Questions"><link rel="next" href="macros.html" title="Macros"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Usage Questions</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="installation.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="macros.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="usage"></a>Usage Questions</h2></div></div><div></div></div><p>
+  This section deals general usage of jEdit, including customisation.
+</p><div class="qandaset"><dl><dt>1.  <a href="usage.html#text-abbrev">Abbreviations</a></dt><dd><dl><dt>Q: <a href="usage.html#id2590402">
+          How can I create abbreviations on the fly as I type?
+        </a></dt><dt>Q: <a href="usage.html#id2591884">
+          How can I have abbreviations expanded automatically as I type?
+        </a></dt></dl></dd><dt>2.  <a href="usage.html#text-clipboard">Clipboard features</a></dt><dd><dl><dt>Q: <a href="usage.html#id2591929">
+          Can I copy selections from more than one location in a document
+          (or more than one document) and paste the aggregate text in one
+          operation?
+        </a></dt></dl></dd><dt>3.  <a href="usage.html#file-attributes">File Attributes</a></dt><dd><dl><dt>Q: <a href="usage.html#id2592113">
+            Why does the screen display continue to mark a file as
+            dirty after I undo all changes made to the buffer?
+        </a></dt><dt>Q: <a href="usage.html#id2592131">
+            Does jEdit preserve file ownership and permissions when it
+            saves files?
+        </a></dt><dt>Q: <a href="usage.html#id2592238">
+            Why does jEdit ignore my choice for line separator
+            characters when I save a file?
+        </a></dt><dt>Q: <a href="usage.html#id2592252">
+            Can jEdit auto-detect character encodings when it opens a file?
+        </a></dt><dt>Q: <a href="usage.html#id2592312">
+        I'm using the iso-8859-1 character encoding.  How do I type and save the
+        Euro sign (&#8364;)?
+      </a></dt></dl></dd><dt>4.  <a href="usage.html#file-manage">File Management</a></dt><dd><dl><dt>Q: <a href="usage.html#id2592453">
+            How can I open files in jEdit using drag and drop?
+        </a></dt><dt>Q: <a href="usage.html#id2592467">
+            How do I add and remove directories to the list of
+            favorites in jEdit's File System Browser?
+        </a></dt><dt>Q: <a href="usage.html#id2592570">
+            How do I associate particular file types with jEdit so I can open them
+            by double clicking their icons in Windows Explorer?
+        </a></dt><dt>Q: <a href="usage.html#id2592596">
+            Can I restrict jEdit to opening and saving files in a single directory
+            without changing file permissions?
+        </a></dt><dt>Q: <a href="usage.html#id2592610">
+            On Windows, how can I change the name of my file from
+            myfile.txt to MyFile.txt?
+        </a></dt><dt>Q: <a href="usage.html#id2592656">
+            Can I recursively delete a directory's files in jEdit's
+            File Browser?
+        </a></dt></dl></dd><dt>5.  <a href="usage.html#text-format">Formatting text</a></dt><dd><dl><dt>Q: <a href="usage.html#id2592679">
+          How do I indent or unindent selections of text?
+        </a></dt><dt>Q: <a href="usage.html#id2592724">
+			Is there a way to automatically view line numbers when a buffer is opened?
+		</a></dt><dt>Q: <a href="usage.html#id2592759">
+			With JDK 1.3 and Lucida Console font I have problems displaying syntax
+			highlighting text. Sometimes the fonts become italicized or bold without any
+			reason.
+		</a></dt><dt>Q: <a href="usage.html#id2592777">
+			Does jEdit know smart quotes? In .tex files I would like to use
+      `` or ''
+			instead of ".
+		</a></dt><dt>Q: <a href="usage.html#id2592823">
+			Does jEdit have a soft wrap text mode?
+		</a></dt><dt>Q: <a href="usage.html#id2592858">
+The display of spaces as a character in the editor is annoying. How can I
+disable those small square boxes?
+</a></dt><dt>Q: <a href="usage.html#id2592887">
+			Does jEdit support i18n?
+		</a></dt><dt>Q: <a href="usage.html#id2592988">
+			When using soft wrap, why does it scroll per physical line and not screen line?
+		</a></dt></dl></dd><dt>6.  <a href="usage.html#text-print">Printing text</a></dt><dd><dl><dt>Q: <a href="usage.html#id2593017">
+			What can I do to improve printing performance?
+		</a></dt></dl></dd><dt>7.  <a href="usage.html#source-compile">Compiling source code</a></dt><dd><dl><dt>Q: <a href="usage.html#id2593083">
+			How do I compile my Java source in JEdit?
+		</a></dt><dt>Q: <a href="usage.html#id2593153">
+			How do I create a new edit mode?
+		</a></dt><dt>Q: <a href="usage.html#id2593175">
+			Does jEdit support DocBook tags?
+		</a></dt></dl></dd><dt>8.  <a href="usage.html#customize-other">Other Settings and Options</a></dt><dd><dl><dt>Q: <a href="usage.html#id2593216">
+			How can I change the font used for menu labels and other elements of jEdit's
+			user interface?
+		</a></dt><dt>Q: <a href="usage.html#id2593390">
+			I want to add a directory to the classpath. I did this in the standalone
+			BeanShell with ease by using the addClassPath(String)
+      method. but this doesn't work in a macro. How could I manage the
+      classpath in jEdit?
+		</a></dt><dt>Q: <a href="usage.html#id2593417">
+			Can I have an emacs style tab key (tab anywhere in a line re-indents it)?
+		</a></dt><dt>Q: <a href="usage.html#id2593518">
+			Are there any hidden features?
+		</a></dt></dl></dd></dl><table border="0" summary="Q and A Set"><col align="left" width="1%"><tbody><tr class="qandadiv"><td align="left" valign="top" colspan="2"><a name="text-abbrev"></a><h4 class="title"><a name="text-abbrev"></a>1. Abbreviations</h4></td></tr><tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="usage.html#id2590402">
+          How can I create abbreviations on the fly as I type?
+        </a></dt><dt>Q: <a href="usage.html#id2591884">
+          How can I have abbreviations expanded automatically as I type?
+        </a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="id2590402"></a><a name="abbrevs-create-onfly"></a><b>Q:</b></td><td align="left" valign="top"><p>
+          How can I create abbreviations &#8220;<span class="quote">on the fly</span>&#8221; as I type?
+        </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+          Type the form of abbreviation you wish to use, then without pressing the
+          <tt class="keycap">SPACE</tt> key, press <tt class="keycap">CTRL</tt>+<tt class="keycap">;</tt>.
+          A dialog will appear for entering text that goes before and after the
+          editing caret. For example, you can insert an opening HTML or XML tag
+          before the cursor and its corresponding closing tag after the cursor.
+          Use the mouse to select <span><b class="guilabel">Add global</b></span> or <span><b class="guilabel">Add
+          mode-specific</b></span>. The first choice makes the abbreviation
+          available for all documents; the second makes it available only in
+          documents with the same editing mode as the current document. In this
+          way, you can add abbreviations that operate only a particular class of
+          documents, for example, Java source files or XML markup. Either way, the
+          abbreviation will be stored for future use.
+        </p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2591884"></a><a name="abbrevs-expand-type"></a><b>Q:</b></td><td align="left" valign="top"><p>
+          How can I have abbreviations expanded automatically as I type?
+        </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+          Select <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global
+          Options</b></span>, then select the <span><b class="guimenuitem">Abbreviations</b></span>
+          option pane. You will see a checkbox option for &#8220;<span class="quote">Space bar expands
+          abbrevs</span>&#8221;.  Here you can also add, modify and delete abbreviations on
+          a global basis or for individual editing modes.
+        </p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><a name="text-clipboard"></a><h4 class="title"><a name="text-clipboard"></a>2. Clipboard features</h4></td></tr><tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="usage.html#id2591929">
+          Can I copy selections from more than one location in a document
+          (or more than one document) and paste the aggregate text in one
+          operation?
+        </a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="id2591929"></a><a name="clip-multiple"></a><b>Q:</b></td><td align="left" valign="top"><p>
+          Can I copy selections from more than one location in a document
+          (or more than one document) and paste the aggregate text in one
+          operation?
+        </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+            The <span><b class="guimenuitem">Cut Append</b></span>
+            (<tt class="keycap">CTRL</tt>+<tt class="keycap">E</tt> 
+            <tt class="keycap">CTRL</tt>+<tt class="keycap">U</tt>)
+            and <span><b class="guimenuitem">Copy
+            Append</b></span> (<tt class="keycap">CTRL</tt>+<tt class="keycap">E</tt> 
+            <tt class="keycap">CTRL</tt>+<tt class="keycap">A</tt>)
+            both add the selected text to the existing contents of the Clipboard. A single
+            <span><b class="guimenuitem">Paste</b></span>
+            (<tt class="keycap">CTRL</tt>+<tt class="keycap">V</tt>)
+            command will insert the aggregated text at the cursor or in place of an existing
+            selection.
+        </p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><a name="file-attributes"></a><h4 class="title"><a name="file-attributes"></a>3. File Attributes</h4></td></tr><tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="usage.html#id2592113">
+            Why does the screen display continue to mark a file as
+            dirty after I undo all changes made to the buffer?
+        </a></dt><dt>Q: <a href="usage.html#id2592131">
+            Does jEdit preserve file ownership and permissions when it
+            saves files?
+        </a></dt><dt>Q: <a href="usage.html#id2592238">
+            Why does jEdit ignore my choice for line separator
+            characters when I save a file?
+        </a></dt><dt>Q: <a href="usage.html#id2592252">
+            Can jEdit auto-detect character encodings when it opens a file?
+        </a></dt><dt>Q: <a href="usage.html#id2592312">
+        I'm using the iso-8859-1 character encoding.  How do I type and save the
+        Euro sign (&#8364;)?
+      </a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592113"></a><a name="dirty-file"></a><b>Q:</b></td><td align="left" valign="top"><p>
+            Why does the screen display continue to mark a file as
+            &#8220;<span class="quote">dirty</span>&#8221; after I undo all changes made to the buffer?
+        </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+            This is a problem in jEdit 3.2.2 that has been fixed in version 4.0 or newer.
+            You should upgrade.
+         </p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592131"></a><a name="file-owner-preserve"></a><b>Q:</b></td><td align="left" valign="top"><p>
+            Does jEdit preserve file ownership and permissions when it
+            saves files?
+        </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+          One reason this can be an issue is that by default, jEdit adopts the conservative
+          approach of saving a file to a temporary name before renaming that file
+          to the desired name. This procedure minimizes the risk of crashes
+          causing loss of data, and works without reported problems on local file
+          systems. However, when files are served remotely by FTP, Samba or other means,
+          it may not be possible to preserve file attributes on the
+          server because the newly created temporary file's owner may differ from
+          the owner of the original file on the server.
+        </p><p>
+          To avoid this problem, you can disable the two-step file saving routine. Select
+          <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>, then
+          under <span><b class="guimenuitem">Loading &amp; Saving</b></span>, clear the checkbox for
+          <span><b class="guimenuitem">Two-stage save</b></span>.
+        </p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592238"></a><a name="file-linesep-choice"></a><b>Q:</b></td><td align="left" valign="top"><p>
+            Why does jEdit ignore my choice for line separator
+            characters when I save a file?
+        </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+            When jEdit saves an existing file, it uses the line separator
+            already used by the file.  The line separator designated in the
+            buffer options or elsewhere is used only for new files.
+        </p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592252"></a><a name="file-autodetect-encoding"></a><b>Q:</b></td><td align="left" valign="top"><p>
+            Can jEdit auto-detect character encodings when it opens a file?
+        </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+            Only Unicode can be detected when a file is loaded. For other
+            encodings, you must specify the encoding when the file is loaded
+            if you do not wish to use the default
+            encoding for your operating system.
+        </p><p>
+            There are a few features that can help you navigate through encoding
+            issues. You can select the encoding you wish to use from <span><b class="guisubmenu">
+            Encoding</b></span> in the <span><b class="guimenu">Commands</b></span> menu of the
+			File System Browser.
+            You can also designate a default encoding in the <span><b class="guimenuitem">Loading
+            &amp; Saving</b></span> pane of the Global Options dialog; if you do
+            not, jEdit adopts your operating system's default encoding as its own
+            default. You can change the encoding used to save an individual file by
+            selecting <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Buffer
+            Options</b></span> and changing the current buffer's properties.
+            Finally, jEdit keeps track of the encodings used in the files named in
+            the <span><b class="guimenu">File</b></span>&gt;<span><b class="guimenuitem">Recent Files</b></span>
+            drop-down list.
+         </p><p>
+            These features allow you to minimize the attention given to character
+            encodings, but you must still pay some attention if you do not want
+            to use default settings.
+        </p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592312"></a><a name="file-euro-char"></a><b>Q:</b></td><td align="left" valign="top"><p>
+        I'm using the iso-8859-1 character encoding.  How do I type and save the
+        Euro sign (&#8220;<span class="quote">&#8364;</span>&#8221;)?
+      </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+        You need to use instead the iso-8859-15 character set, which is a modification
+        of iso-8859-1 that includes the Euro sign and some Finnish and French characters.
+        The Euro sign represents character value 0xA4 in this 8-bit set. To open a file
+        manually using this encoding, select <span><b class="guimenu">File</b></span>&gt;<span><b class="guimenuitem">Open...
+        </b></span>, and select <span><b class="guimenuitem">ISO8859_15</b></span> from <span><b class="guimenu">
+		Commands</b></span>&gt;<span><b class="guisubmenu">Enconding</b></span> before opening the file.
+        </p><p>
+          There is a startup script in the &#8220;<span class="quote">Downloads</span>&#8221; area of
+          <a href="http://community.jedit.org" target="_top">jEdit Community</a>
+          named <tt class="filename">euro.bsh</tt> that can be used as a startup script to
+          help simplify the insertion of the Euro symbol if your keyboard currently lacks
+          a dedicated key.
+        </p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><a name="file-manage"></a><h4 class="title"><a name="file-manage"></a>4. File Management</h4></td></tr><tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="usage.html#id2592453">
+            How can I open files in jEdit using drag and drop?
+        </a></dt><dt>Q: <a href="usage.html#id2592467">
+            How do I add and remove directories to the list of
+            favorites in jEdit's File System Browser?
+        </a></dt><dt>Q: <a href="usage.html#id2592570">
+            How do I associate particular file types with jEdit so I can open them
+            by double clicking their icons in Windows Explorer?
+        </a></dt><dt>Q: <a href="usage.html#id2592596">
+            Can I restrict jEdit to opening and saving files in a single directory
+            without changing file permissions?
+        </a></dt><dt>Q: <a href="usage.html#id2592610">
+            On Windows, how can I change the name of my file from
+            myfile.txt to MyFile.txt?
+        </a></dt><dt>Q: <a href="usage.html#id2592656">
+            Can I recursively delete a directory's files in jEdit's
+            File Browser?
+        </a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592453"></a><a name="open-dnd"></a><b>Q:</b></td><td align="left" valign="top"><p>
+            How can I open files in jEdit using drag and drop?
+        </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+            Try installing the Drag and Drop plugin using the Plugin Manager
+            feature. It works with most (but not all) combinations of operating
+            systems and current Java runtime environments.
+        </p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592467"></a><a name="add-favorites"></a><b>Q:</b></td><td align="left" valign="top"><p>
+            How do I add and remove directories to the list of
+            &#8220;<span class="quote">favorites</span>&#8221; in jEdit's File System Browser?
+        </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+            To add a directory to the list of favorites, navigate so that
+            the directory is at the top of the tree displayed in the File System
+            Browser window, click the <span><b class="guimenuitem">Favorites</b></span> button,
+            and select
+            <span><b class="guimenuitem">Add to favorites</b></span> from the resulting menu.
+            To delete a directory from the favorites list, use the same menu
+            to go to the favorites list. Right-click on the directory to
+            be deleted and select <span><b class="guimenuitem">Delete</b></span>.
+            This operation will delete the directory from the list of
+            favorites but will have no effect on the directory itself.
+        </p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592570"></a><a name="associate-files"></a><b>Q:</b></td><td align="left" valign="top"><p>
+            How do I associate particular file types with jEdit so I can open them
+            by double clicking their icons in Windows Explorer?
+        </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+            If you are using jEditLauncher, you associate the file extension with
+            <i class="replaceable"><tt>[full path]</tt></i><b class="userinput"><tt>\jedit.exe
+            "%1"</tt></b>.
+        </p><p>
+            The jEditLauncher package for Windows includes a custom
+            context menu handler.  It will provide menu items for
+            using jEdit any time you right-click on a file icon in
+            Windows Explorer or a Windows file menu.  This feature does
+            not interfere with any existing file associations.
+        </p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592596"></a><a name="open-restrict-dir"></a><b>Q:</b></td><td align="left" valign="top"><p>
+            Can I restrict jEdit to opening and saving files in a single directory
+            without changing file permissions?
+        </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+            The easiest way to get this kind of behavior is to use macros that open
+            the Virtual File Browser to a specific, fixed directory, and then
+            change the default keyboard shortcuts for opening and saving files to
+            run these macros.
+        </p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592610"></a><a name="filename-uc-to-lc"></a><b>Q:</b></td><td align="left" valign="top"><p>
+            On Windows, how can I change the name of my file from
+            <tt class="filename">myfile.txt</tt> to <tt class="filename">MyFile.txt</tt>?
+        </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+            The Windows native file system deals with file names in a
+            case-insensitive manner, so <tt class="filename">myfile.txt</tt> and
+            <tt class="filename">MyFile.txt</tt> refer to the same file. As a result, the
+            jEdit file browser treats both spellings identically and does not
+            make a name change. Using our example, the easiest workaround is to
+            rename the file in two steps: first to <tt class="filename">_myfile.txt</tt>,
+            then to <tt class="filename">MyFile.txt</tt>.
+        </p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592656"></a><a name="file-delete-recurse"></a><b>Q:</b></td><td align="left" valign="top"><p>
+            Can I recursively delete a directory's files in jEdit's
+            File Browser?
+        </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+            No. The feature is being planned for inclusion in a future
+            jEdit version.  The fastest way to do this in the current
+            jEdit version is to use the Console plugin and a native
+            command.
+        </p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><a name="text-format"></a><h4 class="title"><a name="text-format"></a>5. Formatting text</h4></td></tr><tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="usage.html#id2592679">
+          How do I indent or unindent selections of text?
+        </a></dt><dt>Q: <a href="usage.html#id2592724">
+			Is there a way to automatically view line numbers when a buffer is opened?
+		</a></dt><dt>Q: <a href="usage.html#id2592759">
+			With JDK 1.3 and Lucida Console font I have problems displaying syntax
+			highlighting text. Sometimes the fonts become italicized or bold without any
+			reason.
+		</a></dt><dt>Q: <a href="usage.html#id2592777">
+			Does jEdit know smart quotes? In .tex files I would like to use
+      `` or ''
+			instead of ".
+		</a></dt><dt>Q: <a href="usage.html#id2592823">
+			Does jEdit have a soft wrap text mode?
+		</a></dt><dt>Q: <a href="usage.html#id2592858">
+The display of spaces as a character in the editor is annoying. How can I
+disable those small square boxes?
+</a></dt><dt>Q: <a href="usage.html#id2592887">
+			Does jEdit support i18n?
+		</a></dt><dt>Q: <a href="usage.html#id2592988">
+			When using soft wrap, why does it scroll per physical line and not screen line?
+		</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592679"></a><a name="text-indent"></a><b>Q:</b></td><td align="left" valign="top"><p>
+          How do I indent or unindent selections of text?
+        </p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+            Using jEdit's default configuration, you can indent a selection of text
+            by pressing <tt class="keycap">ALT</tt>+<tt class="keycap">RIGHT</tt>.
+            Unindent a selection by pressing
+            <tt class="keycap">ALT</tt>+<tt class="keycap">LEFT</tt>.
+        </p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592724"></a><a name="text-line-numbers"></a><b>Q:</b></td><td align="left" valign="top"><p>
+			Is there a way to automatically view line numbers when a buffer is opened?
+		</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+			<span><b class="guimenuitem">Select Utilities&gt;Global Options</b></span>, and in
+			the <span><b class="guimenuitem">Gutter</b></span> option pane select
+			the <span><b class="guimenuitem">Line Numbering</b></span> check box.
+		</p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592759"></a><a name="text-display-lucida"></a><b>Q:</b></td><td align="left" valign="top"><p>
+			With JDK 1.3 and Lucida Console font I have problems displaying syntax
+			highlighting text. Sometimes the fonts become italicized or bold without any
+			reason.
+		</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+			The Lucida Console font does not come in a bold style. Various platforms and
+			native applications will render the bold style by overprinting, but this appears
+			not to work correctly in your installation. Unfortunately, there is nothing
+			jEdit can do about this, and the best thing to do is to select another font.
+		</p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592777"></a><a name="smart-quote"></a><b>Q:</b></td><td align="left" valign="top"><p>
+			Does jEdit know smart quotes? In .tex files I would like to use
+      <b class="userinput"><tt>``</tt></b> or <b class="userinput"><tt>''</tt></b>
+			instead of <b class="userinput"><tt>"</tt></b>.
+		</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+			While jEdit can display any character provided by a supported encoding set and
+			enter any character supported by a keyboard driver, it does not have the ability
+			to insert &#8220;<span class="quote">smart quote</span>&#8221; pairs automatically as some word processors
+			do. This would require a BeanShell macro to modify quoted text.
+		</p><p>
+      You also have the option of using a TeX macro (or, in LaTeX, a pair of
+      environment tags) to have the standard double quotation mark
+      <b class="userinput"><tt>"</tt></b> transformed into the appropriate opening or closing
+      smart quotes without the need to keep track of when quoted text opens or closes.
+    </p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592823"></a><a name="text-softwrap"></a><b>Q:</b></td><td align="left" valign="top"><p>
+			Does jEdit have a &#8220;<span class="quote">soft</span>&#8221; wrap text mode?
+		</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+			Beginning with version 4.0pre4, jEdit has soft wrap capability which can be activated
+      for a specific buffer, specific editing modes, or for all documents by default.
+      In prior versions, both the text wrap feature and the <span><b class="guimenuitem">Edit&gt;Text&gt;Format
+			Paragraph</b></span> command insert &#8220;<span class="quote">hard</span>&#8221; end of line
+			characters.  This &#8220;<span class="quote">hard wrap</span>&#8221; feature remains available as an option
+      for buffers and editing modes.
+		</p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592858"></a><a name="text-display-spaces"></a><b>Q:</b></td><td align="left" valign="top"><p>
+The display of spaces as a character in the editor is annoying. How can I
+disable those small square boxes?
+</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+This is controlled by the WhiteSpace plugin. To change your settings to disable
+display of whitespace characters, select <span><b class="guimenuitem">Utilities&gt;Global
+Options</b></span>, then select <span><b class="guimenuitem">Plugin
+options&gt;WhiteSpace</b></span>. You can separately configure the display
+of spaces, tabs, and other whitespace characters.
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592887"></a><a name="text-i18n"></a><b>Q:</b></td><td align="left" valign="top"><p>
+			Does jEdit support i18n?
+		</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+			When editing text documents, jEdit supports any available encoding scheme, and
+			can open files with a specified encoding other than the default encoding of your
+			operating system using the <span><b class="guimenu">Commands</b></span>&gt;<span><b class="guisubmenu">Encoding
+			</b></span> from the File System Browser.
+		</p><p>
+			With respect to menu labels, message strings and other GUI elements, the jEdit
+			project team currently does not have the resources to maintain multiple property
+			sets in languages other than English, particularly since the development effort
+			is continuing at a rapid pace. There has not been great demand for this in any
+			event. This may be because jEdit is primarily a tool for programmers, and the
+			use of English as a common first or second language is widespread in the global
+			programming community. This decision may be reconsidered when the application
+			has further matured and if more individuals express a willingness to be involved
+			in translation work.
+		</p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2592988"></a><a name="text-wrap"></a><b>Q:</b></td><td align="left" valign="top"><p>
+			When using soft wrap, why does it scroll per physical line and not screen line?
+		</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+			This will change in jEdit 4.2.
+		</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><a name="text-print"></a><h4 class="title"><a name="text-print"></a>6. Printing text</h4></td></tr><tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="usage.html#id2593017">
+			What can I do to improve printing performance?
+		</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="id2593017"></a><a name="text-print-improve"></a><b>Q:</b></td><td align="left" valign="top"><p>
+			What can I do to improve printing performance?
+		</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+			Prior to release of version 1.4 of the Java Development Kit (JDK), printing
+      has been one of the weak
+      areas of the Java platform. If you are using JDK version 1.3, here
+      are a few suggestions on improving printing performance.
+    </p><p>
+			One simple way to improve printing is to use the InfoViewer plugin to display and
+      print a text file in your favorite Web browser. You can also write a macro that
+      saves a buffer and then passes the buffer's file name (using the method
+			<tt class="filename">buffer.getPath()</tt>) to an external print utility. The file
+			<tt class="filename">prettyprint.bat</tt> in the
+			Downloads section of <a href="http://community.jedit.org" target="_top">jEdit
+			Community</a> is an example of this approach using a
+			Windows batch file and Ghostscript. You can then change the
+			<tt class="keycap">CTRL</tt>+<tt class="keycap">P</tt>
+			keyboard shortcut to point to your printing macro.
+		</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><a name="source-compile"></a><h4 class="title"><a name="source-compile"></a>7. Compiling source code</h4></td></tr><tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="usage.html#id2593083">
+			How do I compile my Java source in JEdit?
+		</a></dt><dt>Q: <a href="usage.html#id2593153">
+			How do I create a new edit mode?
+		</a></dt><dt>Q: <a href="usage.html#id2593175">
+			Does jEdit support DocBook tags?
+		</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="id2593083"></a><a name="compile-java"></a><b>Q:</b></td><td align="left" valign="top"><p>
+			How do I compile my Java source in JEdit?
+		</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+			There are a number of plugins that you can use to compile Java source code. You
+			can run a Java compiler on the command line in the &#8220;<span class="quote">System</span>&#8221; shell
+			of the <span class="application">Console</span> plugin. If you are using the
+			JCompiler plugin, you	will have a &#8220;<span class="quote">JCompiler</span>&#8221; shell in the
+			<span class="application">Console</span> plugin, and you can run the
+			<b class="userinput"><tt>compile</tt></b> command for the current file, or the
+			<b class="userinput"><tt>compilepkg</tt></b> command on all of the current directory's
+			source code files. You can also use the &#8220;<span class="quote">Ant</span>&#8221; shell in the
+			<span class="application">Console</span> plugin or the
+			<span class="application">AntFarm</span> plugin to run complex builds on a project of
+			source code files, using a <tt class="filename">build.xml</tt> file to specify build
+			commands and dependencies.
+		</p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2593153"></a><a name="source-new-editmode"></a><b>Q:</b></td><td align="left" valign="top"><p>
+			How do I create a new edit mode?
+		</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+			Take a look at the &#8220;<span class="quote">Writing Edit Modes</span>&#8221; section of the User's Guide.
+			Basically, you have to write an XML file containing data on the mode's file
+			extensions and buffer and syntax highlighting properties, then add information
+			about the new mode file to a second XML file containing a catalog of modes.
+		</p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2593175"></a><a name="source-docbook"></a><b>Q:</b></td><td align="left" valign="top"><p>
+			Does jEdit support DocBook tags?
+		</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+			The application contains editing modes for both SGML and XML, and there are a
+			number of abbreviations in the SGML mode that create pairs of DocBook tags on
+			the fly. You can auto-complete closing tags with the XML plugin, and with the
+			XInsert or Template plugin you can create multi-layered DocBook elements. The
+			installation macro <tt class="filename">Insert_Tag.bsh</tt> is useful for creating
+			or inserting tag pairs in existing text, and there are other macros targeting
+			DocBook available from the <a href="http://community.jedit.org" target="_top">jEdit
+			Community</a> web site that you can use or adapt for your own purposes.
+		</p></td></tr><tr class="qandadiv"><td align="left" valign="top" colspan="2"><a name="customize-other"></a><h4 class="title"><a name="customize-other"></a>8. Other Settings and Options</h4></td></tr><tr class="toc" colspan="2"><td align="left" valign="top" colspan="2"><dl><dt>Q: <a href="usage.html#id2593216">
+			How can I change the font used for menu labels and other elements of jEdit's
+			user interface?
+		</a></dt><dt>Q: <a href="usage.html#id2593390">
+			I want to add a directory to the classpath. I did this in the standalone
+			BeanShell with ease by using the addClassPath(String)
+      method. but this doesn't work in a macro. How could I manage the
+      classpath in jEdit?
+		</a></dt><dt>Q: <a href="usage.html#id2593417">
+			Can I have an emacs style tab key (tab anywhere in a line re-indents it)?
+		</a></dt><dt>Q: <a href="usage.html#id2593518">
+			Are there any hidden features?
+		</a></dt></dl></td></tr><tr class="question"><td align="left" valign="top"><a name="id2593216"></a><a name="settings-change-font"></a><b>Q:</b></td><td align="left" valign="top"><p>
+			How can I change the font used for menu labels and other elements of jEdit's
+			user interface?
+		</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+      Select <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>,
+      then the <span><b class="guimenuitem">Appearance</b></span> option pane.  When you select the
+      &#8220;<span class="quote">Metal</span>&#8221; look and feel you can also select the fonts used for
+      various displayed items.
+		</p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2593390"></a><a name="settings-add-classpath"></a><b>Q:</b></td><td align="left" valign="top"><p>
+			I want to add a directory to the classpath. I did this in the standalone
+			BeanShell with ease by using the <tt class="classname">addClassPath(String)</tt>
+      method. but this doesn't work in a macro. How could I manage the
+      classpath in jEdit?
+		</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+			The implementation of BeanShell used in jEdit does not use BeanShell's
+			class loader. The script method contained in loadJarClasses.bsh (found in
+			the Downloads section of <a href="http://community.jedit.org" target="_top">jEdit
+			Community</a>) should work if you know the path to a specific class
+			file or class archive.
+		</p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2593417"></a><a name="settings-emacstab"></a><b>Q:</b></td><td align="left" valign="top"><p>
+			Can I have an emacs style tab key (tab anywhere in a line re-indents it)?
+		</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+			Yes. You can do this by rebinding the <span class="keycode">tab</span> key to
+			<span><b class="command">Indent Selected Lines</b></span> in the <span><b class="guimenuitem">Global Options</b></span>.
+		</p></td></tr><tr class="question"><td align="left" valign="top"><a name="id2593518"></a><a name="settings-unlisted"></a><b>Q:</b></td><td align="left" valign="top"><p>
+			Are there any hidden features?
+		</p></td></tr><tr class="answer"><td align="left" valign="top"><b>A:</b></td><td align="left" valign="top"><p>
+			Yes. You can access them by binding a shortcut to the action in question. You will find
+			a complete list of available commands under the <span><b class="guimenuitem">Shortcuts</b></span> area
+			in the <span><b class="guimenuitem">Global Options</b></span>.
+		</p></td></tr></tbody></table></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="installation.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="macros.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Installation Questions </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Macros</td></tr></table></div></body></html>

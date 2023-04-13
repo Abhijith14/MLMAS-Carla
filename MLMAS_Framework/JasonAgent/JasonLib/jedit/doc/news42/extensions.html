@@ -1,0 +1,27 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Text Area Extensions</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="What's New in jEdit 4.2"><link rel="up" href="api-changes.html" title="Chapter 2. API Changes"><link rel="previous" href="vfs.html" title="Virtual File Systems"><link rel="next" href="syntax-api.html" title="Syntax Highlighting"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Text Area Extensions</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="vfs.html">Prev</a> </td><th width="60%" align="center">Chapter 2. API Changes</th><td width="20%" align="right"> <a accesskey="n" href="syntax-api.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extensions"></a>Text Area Extensions</h2></div></div><div></div></div><p>
+		The API for text area extensions is still the same, however you
+		must make sure your plugin correctly adds itself to existing
+		text areas when it is loaded after jEdit startup, and that it
+		removes itself from open views if it is unloaded before jEdit
+		exits.
+	</p><p>
+		A new method was added to the <a href="../api/org/gjt/sp/jedit/textarea/TextAreaExtension.html" target="_top">TextAreaExtension</a>
+		class:
+	</p><p>
+		</p><div class="funcsynopsis"><table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0"><tr><td><code class="funcdef">void <b class="fsfunc">paintScreenLineRange</b>(</code></td><td>Graphics2D  </td><td><var class="pdparam">gfx</var>, </td></tr><tr><td> </td><td>int  </td><td><var class="pdparam">firstLine</var>, </td></tr><tr><td> </td><td>int  </td><td><var class="pdparam">lastLine</var>, </td></tr><tr><td> </td><td>int[]  </td><td><var class="pdparam">physicalLines</var>, </td></tr><tr><td> </td><td>int[]  </td><td><var class="pdparam">start</var>, </td></tr><tr><td> </td><td>int[]  </td><td><var class="pdparam">end</var>, </td></tr><tr><td> </td><td>int  </td><td><var class="pdparam">y</var>, </td></tr><tr><td> </td><td>int  </td><td><var class="pdparam">lineHeight</var><code>)</code>;</td></tr></table></div><p>
+	</p><p>
+		See the class documentation for information on each parameter.
+	</p><p>
+		You can override this method to paint a range of
+		lines at once, instead of having to respond to each individual
+		<tt class="function">paintValidLine()</tt> and
+		<tt class="function">paintInvalidLine</tt> call.
+	</p><p>
+		While for many text area extensions using this method will result
+		in no speedup, some like the error highlight in the ErrorList
+		plugin become more efficient. The error highlight searches an
+		array each time it has to paint a line. Previously the array
+		was searched for each line painted in screen. Using this method,
+		it is possible to search the array only once when painting a
+		range of lines.
+	</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="vfs.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="api-changes.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="syntax-api.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Virtual File Systems </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Syntax Highlighting</td></tr></table></div></body></html>

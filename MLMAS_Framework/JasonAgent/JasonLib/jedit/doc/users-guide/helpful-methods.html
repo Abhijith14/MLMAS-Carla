@@ -1,0 +1,91 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Helpful Methods in the
+  Macros Class</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="macro-basics.html" title="Chapter 13. Macro Basics"><link rel="previous" href="predefined-variables.html" title="Predefined Variables in BeanShell"><link rel="next" href="dynamic-typing.html" title="BeanShell Dynamic Typing"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Helpful Methods in the
+  Macros Class</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="predefined-variables.html">Prev</a> </td><th width="60%" align="center">Chapter 13. Macro Basics</th><td width="20%" align="right"> <a accesskey="n" href="dynamic-typing.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="helpful-methods"></a>Helpful Methods in the
+  Macros Class</h2></div></div><div></div></div><p>
+   Including <tt class="function">message()</tt>, there are five static methods
+   in the <a href="../api/org/gjt/sp/jedit/Macros.html" target="_top">Macros</a> class that allow you to converse
+   easily with your macros. They all encapsulate calls to methods of the
+   Java platform's <tt class="classname">JOptionPane</tt> class.
+  </p><div class="itemizedlist"><ul type="disc"><li><div class="funcsynopsis"><table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0"><tr><td><code class="funcdef">public static void <b class="fsfunc">message</b>(</code></td><td>Component  </td><td><var class="pdparam">comp</var>, </td></tr><tr><td> </td><td>String  </td><td><var class="pdparam">message</var><code>)</code>;</td></tr></table></div></li><li><div class="funcsynopsis"><table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0"><tr><td><code class="funcdef">public static void <b class="fsfunc">error</b>(</code></td><td>Component  </td><td><var class="pdparam">comp</var>, </td></tr><tr><td> </td><td>String  </td><td><var class="pdparam">message</var><code>)</code>;</td></tr></table></div></li><li><div class="funcsynopsis"><table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0"><tr><td><code class="funcdef">public static String <b class="fsfunc">input</b>(</code></td><td>Component  </td><td><var class="pdparam">comp</var>, </td></tr><tr><td> </td><td>String  </td><td><var class="pdparam">prompt</var><code>)</code>;</td></tr></table></div></li><li><div class="funcsynopsis"><table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0"><tr><td><code class="funcdef">public static String <b class="fsfunc">input</b>(</code></td><td>Component  </td><td><var class="pdparam">comp</var>, </td></tr><tr><td> </td><td>String  </td><td><var class="pdparam">prompt</var>, </td></tr><tr><td> </td><td>String  </td><td><var class="pdparam">defaultValue</var><code>)</code>;</td></tr></table></div></li><li><div class="funcsynopsis"><table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0"><tr><td><code class="funcdef">public static int <b class="fsfunc">confirm</b>(</code></td><td>Component  </td><td><var class="pdparam">comp</var>, </td></tr><tr><td> </td><td>String  </td><td><var class="pdparam">prompt</var>, </td></tr><tr><td> </td><td>int  </td><td><var class="pdparam">buttons</var><code>)</code>;</td></tr></table></div></li></ul></div><p>
+    The format of these four <i class="glossterm">declarations</i> provides a
+    concise reference to the way in which the methods may be used. The
+    keyword <tt class="function">public</tt> means that the method can be used
+    outside the <a href="../api/org/gjt/sp/jedit/Macros.html" target="_top">Macros</a> class. The alternatives are
+    <tt class="function">private</tt> and <tt class="function">protected</tt>. For
+    purposes of BeanShell, you just have to know that BeanShell can only use
+    public methods of other Java classes. The keyword
+    <tt class="function">static</tt> we have already discussed. It means that the
+    method does not operate on a particular object. You call a static
+    function using the name of the class (like
+    <a href="../api/org/gjt/sp/jedit/Macros.html" target="_top">Macros</a>) rather than the name of a particular
+    object (like <tt class="varname">view</tt>). The third word is the type of the
+    value returned by the method. The keyword <tt class="function">void</tt> is
+    Java's way of saying the the method does not have a return value.
+  </p><p>
+   The <tt class="function">error()</tt> method works just like
+   <tt class="function">message()</tt> but displays an error icon in the message
+   box. The <tt class="function">input()</tt> method furnishes a text field for
+   input, an <span><b class="guilabel">OK</b></span> button and a
+   <span><b class="guilabel">Cancel</b></span> button. If <span><b class="guilabel">Cancel</b></span> is pressed,
+   the method returns <tt class="constant">null</tt>. If <span><b class="guilabel">OK</b></span>
+   is pressed, a <tt class="classname">String</tt> containing the contents of
+   the text field is returned. Note that there are two forms of the
+   <tt class="function">input()</tt> method; the first form with two parameters
+   displays an empty input field, the other forms lets you specify an initial,
+   default input value.
+  </p><p>
+   For those without Java experience, it is important to know that
+   <tt class="constant">null</tt> is <span class="emphasis"><em>not</em></span> the same as an
+   empty, &#8220;<span class="quote">zero-length</span>&#8221; <tt class="classname">String</tt>. It is
+   Java's way of saying that there is no object associated with this
+   variable. Whenever you seek to use a return value from
+   <tt class="function">input()</tt> in your macro, you should test it to see if
+   it is <tt class="constant">null</tt>. In most cases, you will
+   want to exit gracefully from the script with a
+   <tt class="function">return</tt> statement, because the presence of a null
+   value for an input variable usually means that the user intended to
+   cancel macro execution. BeanShell will complain if you call any
+   methods on a <tt class="constant">null</tt> object.
+  </p><p>
+   The <tt class="function">confirm()</tt> method in the
+   <a href="../api/org/gjt/sp/jedit/Macros.html" target="_top">Macros</a> class is a little more complex. The
+   <tt class="varname">buttons</tt> parameter has an <tt class="classname">int</tt>
+   type, and the usual way to supply a value is to use one of
+   the predefined values taken from Java's
+   <tt class="classname">JOptionPane</tt> class. You can choose among
+   <tt class="constant">JOptionPane.YES_NO_OPTION</tt>,
+   <tt class="constant">JOptionPane.YES_NO_CANCEL_OPTION</tt>, or
+   <tt class="constant">JOptionPane.OK_CANCEL_OPTION</tt>. The return
+   value of the method is also an <tt class="classname">int</tt>, and should be tested
+   against the value of other predefined constants:
+   <tt class="constant">JOptionPane.YES_OPTION</tt>,
+   <tt class="constant">JOptionPane.NO_OPTION</tt>,
+   <tt class="constant">JOptionPane.OK_OPTION</tt> or
+   <tt class="constant">JOptionPane.CANCEL_OPTION</tt>.
+  </p><p>
+   We've looked at using <tt class="function">Macros.message()</tt>. To
+   use the other methods, you would write something like the
+   following:
+  </p><div class="informalexample"><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">Macros.error(view, "Goodbye, cruel world!");
+
+String result = Macros.input(view, "Type something here.");
+
+String result = Macros.input(view, "When were you born?",
+    "I don't remember, I was very young at the time");
+
+int result = Macros.confirm("Do you really want to learn"
+    + " about BeanShell?",JOptionPane.YES_NO_OPTION);
+    </pre></td></tr></table></div><p>
+    In the last three examples, placing the word <tt class="classname">String</tt>
+    or <tt class="classname">int</tt>
+    before the variable name <tt class="varname">result</tt> tells BeanShell that
+    the variable refers to an integer or a <tt class="classname">String</tt> object, even
+    before a particular value is assigned to the variable.
+    In BeanShell, this <i class="glossterm">declaration</i> of the
+    <i class="glossterm">type</i> of <tt class="varname">result</tt> is not
+    necessary; BeanShell can figure it out when the macro runs. This can be
+    helpful if you are not comfortable with specifying types and classes;
+    just use your variables and let BeanShell worry about it.
+  </p><p>
+   Note that macros are not limited to using these methods for presenting a user interface. In fact, full-blown user interfaces using the Java Swing APIs are also possible, and will be covered later on in <a href="dialog-macro.html" title="Chapter 14. A Dialog-Based Macro">Chapter 14, <i>A Dialog-Based Macro</i></a>.
+  </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="predefined-variables.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="macro-basics.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="dynamic-typing.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Predefined Variables in BeanShell </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> BeanShell Dynamic Typing</td></tr></table></div></body></html>

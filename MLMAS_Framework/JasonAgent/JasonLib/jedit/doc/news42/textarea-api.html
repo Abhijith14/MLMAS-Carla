@@ -1,0 +1,53 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Text Area and Folding</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="What's New in jEdit 4.2"><link rel="up" href="api-changes.html" title="Chapter 2. API Changes"><link rel="previous" href="syntax-api.html" title="Syntax Highlighting"><link rel="next" href="misc-api-changes.html" title="Miscellaneous API Changes"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Text Area and Folding</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="syntax-api.html">Prev</a> </td><th width="60%" align="center">Chapter 2. API Changes</th><td width="20%" align="right"> <a accesskey="n" href="misc-api-changes.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="textarea-api"></a>Text Area and Folding</h2></div></div><div></div></div><p>The
+		<a href="../api/org/gjt/sp/jedit/textarea/JEditTextArea.html" target="_top">JEditTextArea</a>
+		class has a new <tt class="function">addToLeftOfScrollBar()</tt> method that
+		adds a component to the left of the scroll bar. Previously plugins like
+		JDiff had to resort to undocumented hacks to do this.
+	</p><p>
+		The code that displays lines of text on screen has been overhauled for
+		improved performance and correctness. As a result, two methods in
+		<a href="../api/org/gjt/sp/jedit/textarea/JEditTextArea.html" target="_top">JEditTextArea</a>
+		that have been deprecated since jEdit 4.0 were removed:
+	</p><div class="itemizedlist"><ul type="disc"><li><p><tt class="function">xToOffset()</tt></p></li><li><p><tt class="function">offsetToX()</tt></p></li></ul></div><p>
+		As in jEdit 4.0 and 4.1, the <tt class="function">xyToOffset()</tt> and
+		<tt class="function">offseToXY()</tt> methods replace these two.
+	</p><p>
+		Also, the way folds are handled has changed. The
+		<tt class="classname">FoldVisibilityManager</tt> class has been removed,
+		and a number of methods in the <a href="../api/org/gjt/sp/jedit/textarea/JEditTextArea.html" target="_top">JEditTextArea</a>
+		class have been removed also:
+	</p><div class="itemizedlist"><ul type="disc"><li><p><tt class="function">virtualToPhysical()</tt></p></li><li><p><tt class="function">physicalToVirtual()</tt></p></li><li><p><tt class="function">getVirtualLineCount()</tt></p></li></ul></div><p>
+		The replacement for the <tt class="classname">FoldVisibilityManager</tt>
+		class is a class named <a href="../api/org/gjt/sp/jedit/io/DisplayManager.html" target="_top">DisplayManager</a>,
+		with a similar but not identical API.
+	</p><p>
+		Previously, a &#8220;<span class="quote">virtual line number</span>&#8221; was a line number such
+		that each physical line (delimited by <tt class="literal">\n</tt>) counted
+		as 1 if it was visible, and 0 if it was not. They did not take into
+		account lines that were split on screen as a result of soft wrap, and
+		this made the soft wrap scrolling code rather complicated.
+	</p><p>
+		In jEdit 4.2, virtual line numbers are no longer used internally; now,
+		similar &#8220;<span class="quote">scroll line numbers</span>&#8221; are used. Scroll line numbers
+		take both hidden lines and soft wrap into account. The
+		<tt class="function">getFirstLine()</tt> and
+		<tt class="function">setFirstLine()</tt> methods of the
+		<a href="../api/org/gjt/sp/jedit/textarea/JEditTextArea.html" target="_top">JEditTextArea</a>
+		class now work with
+		scroll line numbers.
+	</p><p>
+		An internal API for converting between scroll line numbers and physical
+		line numbers exists, but it is rather complicated and it will not be
+		made public. Instead, if you want the text area to scroll to a given
+		physical line number, use the new
+		<tt class="function">setFirstPhysicalLine()</tt> method in the
+		<a href="../api/org/gjt/sp/jedit/textarea/JEditTextArea.html" target="_top">JEditTextArea</a>
+		class.
+	</p><p>
+		Instead of calling <tt class="function">FoldHandler.registerFoldHandler()</tt>
+		in your
+		plugin's <tt class="function">start()</tt> method, add entries in the
+		<tt class="filename">services.xml</tt> file that look like so:
+	</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">&lt;SERVICE CLASS="org.gjt.sp.jedit.buffer.FoldHandler" NAME="sidekick"&gt;
+    new sidekick.SideKickFoldHandler()
+&lt;/SERVICE&gt;</pre></td></tr></table></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="syntax-api.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="api-changes.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="misc-api-changes.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Syntax Highlighting </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Miscellaneous API Changes</td></tr></table></div></body></html>

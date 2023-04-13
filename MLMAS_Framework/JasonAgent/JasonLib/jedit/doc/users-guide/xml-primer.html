@@ -1,0 +1,46 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>An XML Primer</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="writing-modes.html" title="Chapter 10. Mode Definition Syntax"><link rel="previous" href="writing-modes.html" title="Chapter 10. Mode Definition Syntax"><link rel="next" href="mode-preamble.html" title="The Preamble and MODE tag"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">An XML Primer</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="writing-modes.html">Prev</a> </td><th width="60%" align="center">Chapter 10. Mode Definition Syntax</th><td width="20%" align="right"> <a accesskey="n" href="mode-preamble.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="xml-primer"></a>An XML Primer</h2></div></div><div></div></div><p>
+   A very simple XML file (which also happens to be an edit mode) looks like so:
+  </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">&lt;?xml version="1.0"?&gt;
+
+&lt;!DOCTYPE MODE SYSTEM "xmode.dtd"&gt;
+
+&lt;MODE&gt;
+    &lt;PROPS&gt;
+        &lt;PROPERTY NAME="commentStart" VALUE="/*" /&gt;
+        &lt;PROPERTY NAME="commentEnd" VALUE="*/" /&gt;
+    &lt;/PROPS&gt;
+
+    &lt;RULES&gt;
+        &lt;SPAN TYPE="COMMENT1"&gt;
+            &lt;BEGIN&gt;/*&lt;/BEGIN&gt;
+            &lt;END&gt;*/&lt;/END&gt;
+        &lt;/SPAN&gt;
+    &lt;/RULES&gt;
+&lt;/MODE&gt;</pre></td></tr></table><p>
+   Note that each opening tag must have a corresponding closing tag.
+   If there is nothing between the opening and closing tags, for example
+   <tt class="literal">&lt;TAG&gt;&lt;/TAG&gt;</tt>, the shorthand notation
+   <tt class="literal">&lt;TAG /&gt;</tt> may be used. An example of this shorthand
+   can be seen
+   in the <tt class="literal">&lt;PROPERTY&gt;</tt> tags above.
+  </p><p>
+   XML is case sensitive. <tt class="literal">Span</tt> or <tt class="literal">span</tt>
+   is not the same as <tt class="literal">SPAN</tt>.
+  </p><p>
+   To insert a special character such as &lt; or &gt; literally in XML
+   (for example, inside an attribute value), you must write it as
+   an <i class="firstterm">entity</i>. An
+   entity consists of the character's symbolic name enclosed with
+   &#8220;<span class="quote">&amp;</span>&#8221; and &#8220;<span class="quote">;</span>&#8221;. The most frequently used entities
+   are:
+  </p><div class="itemizedlist"><ul type="disc"><li><p><tt class="literal">&amp;lt;</tt> - The less-than (&lt;)
+   character</p></li><li><p><tt class="literal">&amp;gt;</tt> - The greater-than (&gt;)
+   character</p></li><li><p><tt class="literal">&amp;amp;</tt> - The ampersand (&amp;)
+   character</p></li></ul></div><p>
+   For example, the following will cause a syntax error:
+  </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">&lt;SEQ TYPE="OPERATOR"&gt;&amp;&lt;/SEQ&gt;</pre></td></tr></table><p>
+   Instead, you must write:
+  </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">&lt;SEQ TYPE="OPERATOR"&gt;&amp;amp;&lt;/SEQ&gt;</pre></td></tr></table><p>
+   Now that the basics of XML have been covered, the rest of this
+   section will cover each construct in detail.
+  </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="writing-modes.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="writing-modes.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="mode-preamble.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 10. Mode Definition Syntax </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> The Preamble and MODE tag</td></tr></table></div></body></html>

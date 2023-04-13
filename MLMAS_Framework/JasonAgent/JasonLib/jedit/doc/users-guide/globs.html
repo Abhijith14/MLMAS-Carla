@@ -1,0 +1,31 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Appendix D. Glob Patterns</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="using-jedit-part.html" title="Part I. Using jEdit"><link rel="previous" href="history.html" title="Appendix C. History Text Fields"><link rel="next" href="regexps.html" title="Appendix E. Regular Expressions"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix D. Glob Patterns</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="history.html">Prev</a> </td><th width="60%" align="center">Part I. Using jEdit</th><td width="20%" align="right"> <a accesskey="n" href="regexps.html">Next</a></td></tr></table><hr></div><div class="appendix" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="globs"></a>Appendix D. Glob Patterns</h2></div></div><div></div></div><p>
+  jEdit uses glob patterns similar to those in the various
+  Unix shells to implement file name filters in the file system browser.
+  Glob patterns resemble regular expressions somewhat,
+  but have a much simpler
+  syntax. The following character sequences have special meaning within a glob
+  pattern:
+ </p><div class="itemizedlist"><ul type="disc"><li><p><tt class="literal">?</tt> matches any one character</p></li><li><p><tt class="literal">*</tt> matches any number of characters</p></li><li><p><tt class="literal">{!<i class="replaceable"><tt>glob</tt></i>}</tt>
+  Matches anything that does <span class="emphasis"><em>not</em></span> match
+  <i class="replaceable"><tt>glob</tt></i></p></li><li><p><tt class="literal">{<i class="replaceable"><tt>a</tt></i>,<i class="replaceable"><tt>b</tt></i>,<i class="replaceable"><tt>c</tt></i>}</tt>
+  matches any one of <i class="replaceable"><tt>a</tt></i>, <i class="replaceable"><tt>b</tt></i> or
+  <i class="replaceable"><tt>c</tt></i></p></li><li><p><tt class="literal">[<i class="replaceable"><tt>abc</tt></i>]</tt> matches
+  any character in
+  the set <i class="replaceable"><tt>a</tt></i>, <i class="replaceable"><tt>b</tt></i> or
+  <i class="replaceable"><tt>c</tt></i></p></li><li><p><tt class="literal">[^<i class="replaceable"><tt>abc</tt></i>]</tt> matches
+  any character not
+  in the set <i class="replaceable"><tt>a</tt></i>, <i class="replaceable"><tt>b</tt></i> or
+  <i class="replaceable"><tt>c</tt></i></p></li><li><p><tt class="literal">[<i class="replaceable"><tt>a-z</tt></i>]</tt> matches
+  any character in the
+  range <i class="replaceable"><tt>a</tt></i> to <i class="replaceable"><tt>z</tt></i>, inclusive.
+  A leading or trailing dash will be interpreted literally</p></li></ul></div><p>
+  In addition to the above, a number of &#8220;<span class="quote">character class
+  expressions</span>&#8221; may be used as well:
+ </p><div class="itemizedlist"><ul type="disc"><li><p><tt class="literal">[[:alnum:]]</tt> matches any alphanumeric
+  character</p></li><li><p><tt class="literal">[[:alpha:]]</tt> matches any alphabetical character</p></li><li><p><tt class="literal">[[:blank:]]</tt> matches a space or horizontal tab</p></li><li><p><tt class="literal">[[:cntrl:]]</tt> matches a control character</p></li><li><p><tt class="literal">[[:digit:]]</tt> matches a decimal digit</p></li><li><p><tt class="literal">[[:graph:]]</tt> matches a non-space, non-control character</p></li><li><p><tt class="literal">[[:lower:]]</tt> matches a lowercase letter</p></li><li><p><tt class="literal">[[:print:]]</tt> same as <tt class="literal">[[:graph:]]</tt>, but also space and tab</p></li><li><p><tt class="literal">[[:punct:]]</tt> matches a punctuation character</p></li><li><p><tt class="literal">[[:space:]]</tt> matches any whitespace character, including newlines</p></li><li><p><tt class="literal">[[:upper:]]</tt> matches an uppercase letter</p></li><li><p><tt class="literal">[[:xdigit:]]</tt> matches a valid hexadecimal digit</p></li></ul></div><p>
+  Here are some examples of glob patterns:
+ </p><div class="itemizedlist"><ul type="disc"><li><p><b class="userinput"><tt>*</tt></b> - all files.</p></li><li><p><b class="userinput"><tt>*.java</tt></b> - all files whose names end with
+  &#8220;<span class="quote">.java</span>&#8221;.</p></li><li><p><b class="userinput"><tt>*.[ch]</tt></b> - all files whose names end
+  with either
+  &#8220;<span class="quote">.c</span>&#8221; or &#8220;<span class="quote">.h</span>&#8221;.</p></li><li><p><b class="userinput"><tt>[^#]*</tt></b> - all files whose names do not
+  start with &#8220;<span class="quote">#</span>&#8221;.</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="history.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="using-jedit-part.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="regexps.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Appendix C. History Text Fields </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Appendix E. Regular Expressions</td></tr></table></div></body></html>

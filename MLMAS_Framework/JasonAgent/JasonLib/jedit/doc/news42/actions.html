@@ -1,0 +1,38 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Actions</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="What's New in jEdit 4.2"><link rel="up" href="api-changes.html" title="Chapter 2. API Changes"><link rel="previous" href="class-editplugin.html" title="EditPlugin Class Changes"><link rel="next" href="dockables.html" title="Dockable Windows"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Actions</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="class-editplugin.html">Prev</a> </td><th width="60%" align="center">Chapter 2. API Changes</th><td width="20%" align="right"> <a accesskey="n" href="dockables.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="actions"></a>Actions</h2></div></div><div></div></div><p>
+		The syntax of the <tt class="filename">actions.xml</tt> file has not changed.
+	</p><p>
+		A few methods of the <a href="../api/org/gjt/sp/jedit/EditAction.html" target="_top">EditAction</a>
+		class were made
+		final, since these three values must be known even if the action
+		instance in question has not been loaded:
+	</p><div class="itemizedlist"><ul type="disc"><li><p><tt class="function">getLabel()</tt></p></li><li><p><tt class="function">isToggle()</tt></p></li><li><p><tt class="function">getMouseOverText()</tt></p></li></ul></div><p>
+		This change does not affect plugins that define actions using an
+		<tt class="filename">actions.xml</tt> file. However, if your plugin creates
+		action instances dynamically, you will need to make calls like the
+		following instead of overriding these methods:
+	</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">jEdit.setTemporaryProperty("<i class="replaceable"><tt>action name</tt></i>.label",
+    "<i class="replaceable"><tt>Hello World</tt></i>");
+jEdit.setTemporaryProperty("<i class="replaceable"><tt>action name</tt></i>.toggle",
+    "<i class="replaceable"><tt>true or false</tt></i>");
+jEdit.setTemporaryProperty("<i class="replaceable"><tt>action name</tt></i>.mouse-over",
+    "<i class="replaceable"><tt>some string</tt></i>");</pre></td></tr></table><p>
+		Make sure to use <tt class="function">jEdit.setTemporaryProperty()</tt> and
+		not <tt class="function">jEdit.setProperty()</tt> since the latter will save
+		the values to the user properties file, which is probably not what you
+		want.
+	</p><p>
+		The <tt class="function">jEdit.getActions()</tt> method has been
+		deprecated, since it must load all plugin <tt class="filename">actions.xml</tt>
+		files in order to return an array of <a href="../api/org/gjt/sp/jedit/EditAction.html" target="_top">EditAction</a>
+		instances. Use <tt class="function">jEdit.getActionNames()</tt> instead,
+		which returns an array of strings.
+	</p><p>
+		A new abstract method was added to the <a href="../api/org/gjt/sp/jedit/gui/InputHandler.html" target="_top">InputHandler</a>
+		class:
+	</p><p>
+		</p><div class="funcsynopsis"><table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0"><tr><td><code class="funcdef">void <b class="fsfunc">addKeyBinding</b>(</code></td><td>String  </td><td><var class="pdparam">keyBinding</var>, </td></tr><tr><td> </td><td>String  </td><td><var class="pdparam">action</var><code>)</code>;</td></tr></table></div><p>
+	</p><p>
+		The <tt class="function">removeKeyBinding()</tt> method of the <a href="../api/org/gjt/sp/jedit/gui/DefaultInputHandler.html" target="_top">DefaultInputHandler</a>
+		class has finally been implemented. Previously it always threw
+		an <tt class="classname">InternalError</tt> when invoked.
+	</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="class-editplugin.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="api-changes.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="dockables.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">EditPlugin Class Changes </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Dockable Windows</td></tr></table></div></body></html>

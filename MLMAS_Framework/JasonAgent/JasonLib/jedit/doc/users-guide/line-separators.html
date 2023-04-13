@@ -1,0 +1,29 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Line Separators</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="files.html" title="Chapter 4. Working With Files"><link rel="previous" href="saving.html" title="Saving Files"><link rel="next" href="encodings.html" title="Character Encodings"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Line Separators</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="saving.html">Prev</a> </td><th width="60%" align="center">Chapter 4. Working With Files</th><td width="20%" align="right"> <a accesskey="n" href="encodings.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="line-separators"></a>Line Separators</h2></div></div><div></div></div><p>
+   Unix systems use newlines (<tt class="literal">\n</tt>) to mark line endings in
+   text files. The MacOS uses carriage-returns (<tt class="literal">\r</tt>).
+   Windows uses a carriage-return followed by a newline
+   (<tt class="literal">\r\n</tt>). jEdit can read and write files in all three formats.
+  </p><p>
+   The line separator used by the in-memory representation of file
+   contents is always the newline character.
+   When a file is being loaded, the line separator used in the file on disk
+   is stored in a per-buffer property, and all line-endings are converted to
+   newline characters for the in-memory representation.
+   When the buffer is consequently saved, the value of the property replaces
+   newline characters when the buffer is saved to disk.
+  </p><p>
+   There are several ways to change a buffer's line separator:
+  </p><div class="itemizedlist"><ul type="disc"><li><p>In
+   the <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Buffer
+   Options</b></span> dialog box. See <a href="buffer-opts.html" title="The Buffer Options Dialog Box">the section called &#8220;The Buffer Options Dialog Box&#8221;</a>.</p></li><li><p>By clicking the line separator indicator in the status bar. See <a href="status-bar.html" title="The Status Bar">the section called &#8220;The Status Bar&#8221;</a>.</p></li><li><p>
+    From the keyboard, if a keyboard shortcut has been assigned to the <span><b class="guimenuitem">Toggle Line Separator</b></span> command in the <span><b class="guibutton">Shortcuts</b></span> pane of the
+     <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>
+     dialog box. By default, this command does not have a keyboard shortcut.
+    </p></li></ul></div><p>
+   By default, new files are saved with your operating system's native line
+   separator. This can be changed in the
+   <span><b class="guibutton">General</b></span> pane of the
+   <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>
+   dialog box; see <a href="global-opts.html#general-pane" title="The General Pane">the section called &#8220;The General Pane&#8221;</a>. Note that changing this
+   setting has no effect on existing files.
+  </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="saving.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="files.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="encodings.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Saving Files </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Character Encodings</td></tr></table></div></body></html>

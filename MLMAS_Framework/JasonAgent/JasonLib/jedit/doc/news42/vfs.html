@@ -1,0 +1,30 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Virtual File Systems</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="What's New in jEdit 4.2"><link rel="up" href="api-changes.html" title="Chapter 2. API Changes"><link rel="previous" href="services.html" title="Services"><link rel="next" href="extensions.html" title="Text Area Extensions"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Virtual File Systems</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="services.html">Prev</a> </td><th width="60%" align="center">Chapter 2. API Changes</th><td width="20%" align="right"> <a accesskey="n" href="extensions.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="vfs"></a>Virtual File Systems</h2></div></div><div></div></div><p>
+		Instead of calling <tt class="function">VFSManager.registerVFS()</tt> in your
+		plugin's <tt class="function">start()</tt> method, add entries in the
+		<tt class="filename">services.xml</tt> file that look like so:
+	</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">&lt;SERVICE CLASS="org.gjt.sp.jedit.io.VFS" NAME="ftp"&gt;
+    new ftp.FtpVFS(false);
+&lt;/SERVICE&gt;</pre></td></tr></table><p>
+		A new  <a href="../api/org/gjt/sp/jedit/io/VFS.DirectoryEntryCompare.html" target="_top">VFS.DirectoryEntryCompare</a>
+		class was added,
+		for sorting lists of VFS directory entries.
+	</p><p>
+		Fields named <tt class="varname">canRead</tt> and <tt class="varname">canWrite</tt>
+		were added to the <a href="../api/org/gjt/sp/jedit/io/VFS.DirectoryEntry.html" target="_top">VFS.DirectoryEntry</a>
+		class.
+	</p><p>
+		There is a new extended attribute API to go with the details view in the
+		file system browser. Pass an array of extended attribute names to the
+		<a href="../api/org/gjt/sp/jedit/io/VFS.html" target="_top">VFS</a> constructor, then
+		provide an implementation
+		of the <tt class="function">getExtendedAttribute()</tt> method in your
+		subclass of <a href="../api/org/gjt/sp/jedit/io/VFS.DirectoryEntry.html" target="_top">VFS.DirectoryEntry</a>.
+	</p><p>
+		The following two methods in the <a href="../api/org/gjt/sp/jedit/io/VFSManager.html" target="_top">VFSManager</a>
+		class have been deprecated since they can no longer be implemented for
+		file systems using the deferred loading API
+	</p><div class="itemizedlist"><ul type="disc"><li><p><tt class="function">getVFSByName()</tt> - use
+		<tt class="function">getVFSForProtocol()</tt>
+		instead.</p></li><li><p><tt class="function">getFilesystems()</tt> - use
+		<tt class="function">getVFSs()</tt>, which returns a string array,
+		instead.</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="services.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="api-changes.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="extensions.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Services </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Text Area Extensions</td></tr></table></div></body></html>

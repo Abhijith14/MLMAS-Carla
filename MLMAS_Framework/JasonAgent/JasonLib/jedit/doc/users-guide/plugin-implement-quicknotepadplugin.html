@@ -1,0 +1,71 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>The QuickNotepadPlugin Class</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="plugin-implement.html" title="Chapter 18. Implementing a Simple Plugin"><link rel="previous" href="plugin-load.html" title="
+
+How Plugins are Loaded"><link rel="next" href="plugin-implement-editbus.html" title="The EditBus"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The QuickNotepadPlugin Class</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="plugin-load.html">Prev</a> </td><th width="60%" align="center">Chapter 18. Implementing a Simple Plugin</th><td width="20%" align="right"> <a accesskey="n" href="plugin-implement-editbus.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="plugin-implement-quicknotepadplugin"></a>The QuickNotepadPlugin Class</h2></div></div><div></div></div><p>
+    The major issues encountered when writing a plugin core class arise
+    from the developer's decisions on what features the plugin will make
+    available. These issues have implications for other plugin elements
+    as well.
+</p><div class="itemizedlist"><ul type="disc"><li><p>
+    Will the plugin provide for actions that the user can trigger using
+    jEdit's menu items, toolbar buttons and keyboard shortcuts?
+  </p></li><li><p>
+    Will the plugin have its own visible interface?
+  </p></li><li><p>
+    Will the plugin have settings that the user can configure?
+  </p></li><li><p>
+    Will the plugin
+    respond to any messages reflecting changes in the host
+    application's state?
+  </p></li></ul></div><p>
+  Recall that the plugin core class must extend
+  <a href="../api/org/gjt/sp/jedit/EditPlugin.html" target="_top">
+  <tt class="classname">EditPlugin</tt></a>.
+  In QuickNotepad's plugin core class, there are no special
+  initialization or shutdown chores to perform, so we will not need
+  a <tt class="function">start()</tt> or <tt class="function">stop()</tt> method.
+</p><p>
+  The resulting plugin core class is lightweight and straightforward to implement:
+</p><div class="itemizedlist"><ul type="disc"><li><div class="informalexample"><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">public class QuickNotepadPlugin extends EditPlugin {
+    public static final String NAME = "quicknotepad";
+    public static final String MENU = "quicknotepad.menu";
+    public static final String PROPERTY_PREFIX
+        = "plugin.QuickNotepadPlugin.";
+    public static final String OPTION_PREFIX
+        = "options.quicknotepad.";
+</pre></td></tr></table></div><p>
+  First we define a few static
+  <tt class="classname">String</tt> data members to enforce consistent syntax
+  for the name of properties we will use throughout the plugin.
+</p></li><li><div class="informalexample"><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">
+    public void createMenuItems(Vector menuItems) {
+        menuItems.addElement(GUIUtilities.loadMenu(MENU));
+    }</pre></td></tr></table></div><p>
+  This implementation of
+  the <a href="../api/org/gjt/sp/jedit/EditPlugin.html#createMenuItems(java.util.Vector)" target="_top">
+  <tt class="classname">EditPlugin.createMenuItems()</tt></a> method
+  is very typical.
+  It uses a jEdit utility function to create the menu, taking the list
+  of actions from the <tt class="filename">quicknotepad</tt> property, and
+  the label from <tt class="filename">quotenotepad.label</tt>.
+</p><p>
+  If the plugin only had a single menu item (for example, an item
+  activating a dockable window), we would call
+  <a href="../api/org/gjt/sp/jedit/GUIUtilities.html#loadMenuItem(java.lang.String)" target="_top">
+  <tt class="function">GUIUtilities.loadMenuItem()</tt></a> instead of
+  <a href="../api/org/gjt/sp/jedit/GUIUtilities.html#loadMenu(java.lang.String)" target="_top">
+  <tt class="function">GUIUtilities.loadMenu()</tt></a>.
+</p></li><li><div class="informalexample"><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">public void createOptionPanes(OptionsDialog od) {
+        od.addOptionPane(new QuickNotepadOptionPane());
+    }
+
+
+}</pre></td></tr></table></div><p>
+  This implementation of
+  the <a href="../api/org/gjt/sp/jedit/EditPlugin.html#createOptionPanes(org.gjt.sp.jedit.gui.OptionsDialog)" target="_top">
+  <tt class="classname">EditPlugin.createOptionPanes()</tt></a> method
+  adds a new instance of <tt class="classname">QuickNotepadOptionPane</tt>
+  to the given instance of the <span><b class="guimenuitem">Global Options</b></span>
+  dialog box.
+</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="plugin-load.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="plugin-implement.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="plugin-implement-editbus.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">
+
+How Plugins are Loaded </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> The EditBus</td></tr></table></div></body></html>

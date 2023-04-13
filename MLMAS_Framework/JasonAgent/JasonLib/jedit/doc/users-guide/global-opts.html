@@ -1,0 +1,107 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>The Global Options Dialog Box</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="customizing.html" title="Chapter 7. Customizing jEdit"><link rel="previous" href="buffer-local.html" title="Buffer-Local Properties"><link rel="next" href="settings-directory.html" title="The jEdit Settings Directory"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The Global Options Dialog Box</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="buffer-local.html">Prev</a> </td><th width="60%" align="center">Chapter 7. Customizing jEdit</th><td width="20%" align="right"> <a accesskey="n" href="settings-directory.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="global-opts"></a>The Global Options Dialog Box</h2></div></div><div></div></div><p>
+   <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>
+   displays the global options dialog box. The dialog box is divided into
+   several panes, each pane containing a set of related options. Use the list
+   on the left of the dialog box to switch between panes. Only panes
+   created by jEdit are described here; some plugins add their own option
+   panes, and information about them can be found in the documentation
+   for the plugins in question.
+  </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="abbrevs-pane"></a>The Abbreviations Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Abbreviations</b></span> option pane can be used to enable or
+   disable automatic abbreviation expansion, and to edit currently defined
+   abbreviations.
+  </p><p>
+   The combo box labelled &#8220;<span class="quote">Abbrev set</span>&#8221; selects the
+   abbreviation set to edit. The first entry, &#8220;<span class="quote">global</span>&#8221;, contains
+   abbreviations available in all edit modes. The subsequent
+   entries correspond to each mode's local set of abbreviations.
+  </p><p>
+   To change an abbreviation or its expansion, either double-click the appropriate
+   table entry, or click a table entry and then click the
+   <span><b class="guibutton">Edit</b></span> button. This will display a dialog box for
+   modifying the abbreviation.
+  </p><p>
+   The <span><b class="guibutton">Add</b></span> button displays a dialog box where you can
+   define a new abbreviation. The <span><b class="guibutton">Remove</b></span> button removes
+   the currently selected abbreviation from the list.
+  </p><p>
+   See <a href="abbrevs.html#positional-params" title="Positional Parameters">the section called &#8220;Positional Parameters&#8221;</a> for information about positional
+   parameters in abbreviations.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="appearance-pane"></a>The Appearance Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Appearance</b></span> pane can be used to change the
+   appearance of user interface controls such as buttons, labels and menus. The number of items retained in history text fields can also be set here; see <a href="history.html" title="Appendix C. History Text Fields">Appendix C, <i>History Text Fields</i></a>.
+  </p><p>
+   Note that changes to certain settings such as the Swing look and feel require a restart of jEdit to take effect.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="autosave-backups-pane"></a>The Autosave and Backup Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Autosave</b></span> option pane contains settings for the autosave and backup features. See <a href="saving.html#autosave" title="Autosave and Crash Recovery">the section called &#8220;Autosave and Crash Recovery&#8221;</a> and
+   <a href="saving.html#backups" title="Backups">the section called &#8220;Backups&#8221;</a>.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="context-pane"></a>The Context Menu Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Context Menu</b></span> option pane edits the text
+   area's right-click context menu. See <a href="views.html" title="Multiple Views">the section called &#8220;Multiple Views&#8221;</a>.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="docking-pane"></a>The Docking Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Docking</b></span> option pane specifies docking location for various dockable windows. Another way to specify docking locations is to use the popup menus associated with each dockable window; see <a href="docking.html" title="Window Docking">the section called &#8220;Window Docking&#8221;</a>.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="editing-pane"></a>The Editing Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Editing</b></span> option pane contains settings such
+   as the tab size, syntax highlighting and soft tabs on a global or
+   mode-specific basis.
+  </p><p>
+   When changing mode-specific settings,
+   the <span><b class="guibutton">File name glob</b></span> and <span><b class="guibutton">First line
+   glob</b></span> text fields let you specify a glob pattern that names and
+   first lines of buffers will be matched against to determine the edit mode.
+   See <a href="globs.html" title="Appendix D. Glob Patterns">Appendix D, <i>Glob Patterns</i></a> for information about glob patterns.
+  </p><p>
+   This option pane does not change XML mode definition files on disk; it
+   merely writes values to the user properties file which override those set
+   in mode files. To find out how to edit mode files directly, see
+   <a href="writing-modes-part.html" title="Part II. Writing Edit Modes">Part II, &#8220;Writing Edit Modes&#8221;</a>.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="general-pane"></a>The General Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">General</b></span> pane contains various
+   miscellaneous settings, such as the default line separator and file encoding, the number of recent files to remember,
+   if the buffer list should be sorted, and so on.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="gutter-pane"></a>The Gutter Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Gutter</b></span> option pane contains settings to
+   customize the appearance of the gutter. See <a href="overview.html" title="Interface Overview">the section called &#8220;Interface Overview&#8221;</a>.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mouse-pane"></a>The Mouse Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Mouse</b></span> option pane contains settings for toggling drag and drop of text, as well as gutter mouse click behavior.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="printing-pane"></a>The Printing Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Printing</b></span> option pane contains settings to
+   control the appearance of printed output. Workarounds that might be needed for your Java version to print correctly can also be enabled here. See <a href="printing.html" title="Printing">the section called &#8220;Printing&#8221;</a>.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pluginmgr-pane"></a>The Plugin Manager Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Plugin Manager</b></span> pane contains a chooser for the desired download mirror, as well as various settings such as the directory where plugins are to be installed. See <a href="using-plugins.html" title="Chapter 9. Installing and Using Plugins">Chapter 9, <i>Installing and Using Plugins</i></a>.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="firewall-pane"></a>The Proxy Servers Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Proxy Servers</b></span> option pane lets you specify HTTP
+   and SOCKS proxy servers to use when jEdit makes network connections, for
+   example when downloading plugins.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="shortcuts-pane"></a>The Shortcuts Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Shortcuts</b></span> option pane associates keyboard shortcuts with commands. Each command can have up to two shortcuts
+   associated with it.
+  </p><p>
+   The combo box at the top of the option pane selects the command set
+   to edit. Command sets include the set of all built-in commands, the commands of each plugin, and the set of macros.
+  </p><p>
+   To change a shortcut, click the appropriate table entry and press the
+   keys you want associated with that command in the resulting dialog box.
+   The dialog box will warn you if the shortcut is already assigned.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="status-bar-pane"></a>The Status Bar Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Status Bar</b></span> option pane contains settings to customize the
+   status bar, or disable it completely. See <a href="status-bar.html" title="The Status Bar">the section called &#8220;The Status Bar&#8221;</a>.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="syntax-hilite-pane"></a>The Syntax Highlighting Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Syntax Highlighting</b></span> pane can be used to
+   customize the fonts and colors for syntax highlighting. See <a href="modes.html#syntax-hilite" title="Syntax Highlighting">the section called &#8220;Syntax Highlighting&#8221;</a>.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="text-area-pane"></a>The Text Area Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Text Area</b></span> pane contains settings to customize
+   the appearance of the text area. See <a href="overview.html" title="Interface Overview">the section called &#8220;Interface Overview&#8221;</a>.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="toolbar-pane"></a>The Tool Bar Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">Tool Bar</b></span> option pane lets you edit the tool bar,
+   or disable it completely. See <a href="views.html" title="Multiple Views">the section called &#8220;Multiple Views&#8221;</a>.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="view-pane"></a>The View Pane</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">View</b></span> option pane lets you change various settings related to the editor window's appearance, including the arrangement of dockable windows, and if the search bar and buffer switcher should be visible. See <a href="views.html" title="Multiple Views">the section called &#8220;Multiple Views&#8221;</a>.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="vfs-browser-pane"></a>The File System Browser Panes</h3></div></div><div></div></div><p>
+   The <span><b class="guibutton">File System Browser</b></span> group
+   contains two option panes, <span><b class="guibutton">General</b></span> and
+   <span><b class="guibutton">Colors</b></span>. The former contains various file system
+   browser settings. The latter configures glob patterns used for
+   coloring the file list. See <a href="vfs-browser.html" title="The File System Browser">the section called &#8220;The File System Browser&#8221;</a>
+   for more information.
+  </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="buffer-local.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="customizing.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="settings-directory.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Buffer-Local Properties </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> The jEdit Settings Directory</td></tr></table></div></body></html>

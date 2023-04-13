@@ -1,0 +1,315 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Getting Input for a Macro</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="macro-tips.html" title="Chapter 15. Macro Tips and Techniques"><link rel="previous" href="macro-tips.html" title="Chapter 15. Macro Tips and Techniques"><link rel="next" href="startup-scripts.html" title="Startup Scripts"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Getting Input for a Macro</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="macro-tips.html">Prev</a> </td><th width="60%" align="center">Chapter 15. Macro Tips and Techniques</th><td width="20%" align="right"> <a accesskey="n" href="startup-scripts.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="macro-tips-input"></a>Getting Input for a Macro</h2></div></div><div></div></div><p>
+    The dialog-based macro discussed in <a href="dialog-macro.html" title="Chapter 14. A Dialog-Based Macro">Chapter 14, <i>A Dialog-Based Macro</i></a>
+    reflects a conventional approach to obtaining input in a Java program.
+    Nevertheless, it can be too lengthy or tedious for someone
+    trying to write a macro quickly. Not every macro needs a user interface
+    specified in such detail; some macros require only a single keystroke or
+    no input at all. In this section we outline some other techniques for
+    obtaining input that will help you write macros quickly.
+  </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="macro-tips-input-single-line"></a>Getting a Single Line of Text</h3></div></div><div></div></div><p>
+    As mentioned earlier in <a href="helpful-methods.html" title="Helpful Methods in the
+  Macros Class">the section called &#8220;Helpful Methods in the
+  Macros Class&#8221;</a>, the method
+    <tt class="function">Macros.input()</tt> offers a convenient way to obtain
+    a single line of text input. Here is an example that inserts a pair
+    of HTML markup tags specified by the user.
+  </p><div class="informalexample"><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">// Insert_Tag.bsh
+
+void insertTag()
+{
+    caret = textArea.getCaretPosition();
+    tag = Macros.input(view, &#8220;<span class="quote">Enter name of tag:</span>&#8221;);
+    if( tag == null || tag.length() == 0) return;
+    text = textArea.getSelectedText();
+    if(text == null) text = &#8220;<span class="quote"></span>&#8221;;
+    sb = new StringBuffer();
+    sb.append(&#8220;<span class="quote">&lt;</span>&#8221;).append(tag).append(&#8220;<span class="quote">&gt;</span>&#8221;);
+    sb.append(text);
+    sb.append(&#8220;<span class="quote">&lt;/</span>&#8221;).append(tag).append(&#8220;<span class="quote">&gt;</span>&#8221;);
+    textArea.setSelectedText(sb.toString());
+    if(text.length() == 0)
+        textArea.setCaretPosition(caret + tag.length() + 2);
+}
+
+insertTag();
+
+// end Insert_Tag.bsh</pre></td></tr></table></div><p>
+    Here the call to <tt class="function">Macros.input()</tt> seeks the name
+    of the markup tag. This method sets the message box title to a fixed string,
+    &#8220;<span class="quote">Macro input</span>&#8221;, but the specific message <span><b class="guilabel">Enter name
+    of tag</b></span> provides all the information necessary. The return value
+    <tt class="varname">tag</tt> must be tested to see if it is null.  This would
+    occur if the user presses the <span><b class="guilabel">Cancel</b></span> button or
+    closes the dialog window displayed by <tt class="function">Macros.input()</tt>.
+  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="macro-tips-input-multiple-data"></a>Getting Multiple Data Items</h3></div></div><div></div></div><p>
+    If more than one item of input is needed, a succession of calls to
+    <tt class="function">Macros.input()</tt> is a possible, but awkward approach,
+    because it would not be possible to correct early input after the
+    corresponding message box is dismissed.  Where more is required,
+    but a full dialog layout is either unnecessary or too much work,
+    the Java method <tt class="function">JOptionPane.showConfirmDialog()</tt>
+    is available. The version to use has the following prototype:
+  </p><div class="itemizedlist"><ul type="disc"><li><div class="funcsynopsis"><table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0"><tr><td><code class="funcdef">public static int <b class="fsfunc">showConfirmDialog</b>(</code></td><td>Component  </td><td><var class="pdparam">parentComponent</var>, </td></tr><tr><td> </td><td>Object  </td><td><var class="pdparam">message</var>, </td></tr><tr><td> </td><td>String  </td><td><var class="pdparam">title</var>, </td></tr><tr><td> </td><td>int  </td><td><var class="pdparam">optionType</var>, </td></tr><tr><td> </td><td>int  </td><td><var class="pdparam">messageType</var><code>)</code>;</td></tr></table></div></li></ul></div><p>
+    The usefulness of this method arises from the fact that the
+    <tt class="varname">message</tt> parameter can be an object of any
+    Java class (since all classes are derived from
+    <tt class="classname">Object</tt>), or any array of objects.  The
+    following example shows how this feature can be used.
+  </p><div class="informalexample"><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">// excerpt from Write_File_Header.bsh
+
+title = &#8220;<span class="quote">Write file header</span>&#8221;;
+
+currentName = buffer.getName();
+
+nameField = new JTextField(currentName);
+authorField = new JTextField(&#8220;<span class="quote">Your name here</span>&#8221;);
+descField = new JTextField(&#8220;<span class="quote"></span>&#8221;, 25);
+
+namePanel = new JPanel(new GridLayout(1, 2));
+nameLabel = new JLabel(&#8220;<span class="quote">Name of file:</span>&#8221;, SwingConstants.LEFT);
+saveField = new JCheckBox(&#8220;<span class="quote">Save file when done</span>&#8221;,
+    !buffer.isNewFile());
+namePanel.add(nameLabel);
+namePanel.add(saveField);
+
+
+message = new Object[9];
+message[0] = namePanel;
+message[1] = nameField;
+message[2] = Box.createVerticalStrut(10);
+message[3] = &#8220;<span class="quote">Author's name:</span>&#8221;;
+message[4] = authorField;
+message[5] = Box.createVerticalStrut(10);
+message[6] = &#8220;<span class="quote">Enter description:</span>&#8221;;
+message[7] = descField;
+message[8] = Box.createVerticalStrut(5);
+
+if( JOptionPane.OK_OPTION !=
+    JOptionPane.showConfirmDialog(view, message, title,
+        JOptionPane.OK_CANCEL_OPTION,
+        JOptionPane.QUESTION_MESSAGE))
+    return null;
+
+// *****remainder of macro script omitted*****
+
+// end excerpt from Write_File_Header.bsh</pre></td></tr></table></div><p>
+    This macro takes several items of user input and produces a formatted
+    file header at the beginning of the buffer. The full macro is included in
+    the set of macros installed by jEdit. There are a number of input
+    features of this excerpt worth noting.
+  </p><div class="itemizedlist"><ul type="disc"><li><p>
+        The macro uses a total of seven visible components. Two of them are
+        created behind the scenes by <tt class="function">showConfirmDialog()</tt>,
+        the rest are made by the macro. To arrange them, the script creates an
+        array of <tt class="classname">Object</tt> objects and assigns components to
+        each location in the array. This translates to a fixed, top-to-bottom
+        arrangement in the message box created by
+        <tt class="function">showConfirmDialog()</tt>.
+      </p></li><li><p>
+        The macro uses <tt class="classname">JTextField</tt> objects to
+        obtain most of the input data.  The fields <tt class="varname">nameField</tt>
+        and <tt class="varname">authorField</tt> are created with constructors
+        that take the initial, default text to be displayed in the field as a
+        parameter.  When the message box is displayed, the default text
+        will appear and can be altered or deleted by the user.
+      </p></li><li><p>
+        The text field <tt class="varname">descField</tt> uses an empty string for its
+        initial value. The second parameter in its constructor sets the width of
+        the text field component, expressed as the number of characters of
+        &#8220;<span class="quote">average</span>&#8221; width. When
+        <tt class="function">showConfirmDialog()</tt> prepares the layout of the
+        message box, it sets the width wide enough to accommodate the
+        designated with of <tt class="varname">descField</tt>. This technique produces
+        a message box and input text fields that are wide enough for your data
+        with one line of code.
+      </p></li><li><p>
+        The displayed message box includes a <tt class="classname">JCheckBox</tt>
+        component that determines whether the buffer will be saved to disk
+        immediately after the file header is written. To conserve space
+        in the message box, we want to display the check box to the
+        right of the label <span><b class="guilabel">Name of file:</b></span>. To do that,
+        we create a <tt class="classname">JPanel</tt> object and populate it with
+        the label and the checkbox in a left-to-right
+        <tt class="classname">GridLayout</tt>.  The <tt class="classname">JPanel</tt>
+        containing the two components is then added to the beginning of
+        <tt class="varname">message</tt> array.
+      </p></li><li><p>
+        The two visible components created by
+        <tt class="function">showConfirmDialog()</tt> appear at positions 3 and 6 of
+        the <tt class="varname">message</tt> array. Only the text is required; they
+        are rendered as text labels.
+      </p></li><li><p>
+        There are three invisible components created by
+        <tt class="function">showConfirmDialog()</tt>.  Each of them involves
+        a call to <tt class="function">Box.createVerticalStrut()</tt>.  The
+        <tt class="classname">Box</tt> class is a sophisticated layout class
+        that gives the user great flexibility in sizing and positioning
+        components. Here we use a <tt class="function">static</tt> method of
+        the <tt class="classname">Box</tt> class that produces a vertical
+        <i class="glossterm">strut</i>.  This is a transparent component
+        whose width expands to fill its parent component (in this case,
+        the message box).  The single parameter indicates the height
+        of the strut in pixels.  The last call to
+        <tt class="function">createVerticalStrut()</tt> separates the
+        description text field from the <span><b class="guilabel">OK</b></span> and
+        <span><b class="guilabel">Cancel</b></span> buttons that are automatically added
+        by <tt class="function">showConfirmDialog()</tt>.
+      </p></li><li><p>
+        Finally, the call to <tt class="function">showConfirmDialog()</tt> uses
+        defined constants for the option type and the message type.  The
+        constants are the same as those used with the
+        <tt class="function">Macros.confirm()</tt> method; see
+        <a href="helpful-methods.html" title="Helpful Methods in the
+  Macros Class">the section called &#8220;Helpful Methods in the
+  Macros Class&#8221;</a>. The
+        option type signifies the use of <span><b class="guilabel">OK</b></span>
+        and <span><b class="guilabel">Cancel</b></span> buttons. The
+        <tt class="constant">QUERY_MESSAGE</tt> message type causes the message box
+        to display a question mark icon.
+      </p><p>
+        The return value of the method
+        is tested against the value <tt class="constant">OK_OPTION</tt>.  If
+        the return value is something else (because the
+        <span><b class="guilabel">Cancel</b></span> button was pressed or because the
+        message box window was closed without a button press), a
+        <tt class="constant">null</tt> value is returned to a calling function,
+        signaling that the user canceled macro execution.  If the return
+        value is <tt class="constant">OK_OPTION</tt>, each of the input components
+        can yield their contents for further processing by calls to
+        <tt class="function">JTextField.getText()</tt> (or, in the case of
+        the check box, <tt class="function">JCheckBox.isSelected()</tt>).
+      </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="tips-macro-input-combo"></a>Selecting Input From a List</h3></div></div><div></div></div><p>
+  Another useful way to get user input for a macro is to use a combo box
+  containing a number of pre-set options. If this is the only input
+  required, one of the versions of <tt class="function">showInputDialog()</tt>
+  in the <tt class="classname">JOptionPane</tt> class provides a shortcut.
+  Here is its prototype:
+</p><div class="itemizedlist"><ul type="disc"><li><div class="funcsynopsis"><table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0"><tr><td><code class="funcdef">public static Object <b class="fsfunc">showInputDialog</b>(</code></td><td>Component  </td><td><var class="pdparam">parentComponent</var>, </td></tr><tr><td> </td><td>Object  </td><td><var class="pdparam">message</var>, </td></tr><tr><td> </td><td>String  </td><td><var class="pdparam">title</var>, </td></tr><tr><td> </td><td>int  </td><td><var class="pdparam">messageType</var>, </td></tr><tr><td> </td><td>Icon  </td><td><var class="pdparam">icon</var>, </td></tr><tr><td> </td><td>Object[]  </td><td><var class="pdparam">selectionValues</var>, </td></tr><tr><td> </td><td>Object  </td><td><var class="pdparam">initialSelectionValue</var><code>)</code>;</td></tr></table></div></li></ul></div><p>
+    This method creates a message box containing a drop-down list of the
+    options specified in the method's parameters, along with
+    <span><b class="guilabel">OK</b></span> and <span><b class="guilabel">Cancel</b></span> buttons.
+    Compared to <tt class="function">showConfirmDialog()</tt>, this method lacks
+    an <tt class="varname">optionType</tt> parameter and has three additional
+    parameters: an <tt class="varname">icon</tt> to display in the dialog
+    (which can be set to <tt class="constant">null</tt>), an array of
+    <tt class="varname">selectionValues</tt> objects, and a reference to one
+    of the options as the <tt class="varname">initialSelectionValue</tt> to be
+    displayed. In addition, instead of returning an <tt class="classname">int</tt>
+    representing the user's action, <tt class="function">showInputDialog()</tt>
+    returns the <tt class="classname">Object</tt> corresponding to the user's
+    selection, or <tt class="constant">null</tt> if the selection is canceled.
+  </p><p>
+    The following macro fragment illustrates the use of this method.
+  </p><div class="informalexample"><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">// fragment illustrating use of showInputDialog()
+options = new Object[5];
+options[0] = "JLabel";
+options[1] = "JTextField";
+options[2] = "JCheckBox";
+options[3] = "HistoryTextField";
+options[4} = "-- other --";
+
+result = JOptionPane.showInputDialog(view,
+    "Choose component class",
+    "Select class for input component",
+    JOptionPane.QUESTION_MESSAGE,
+    null, options, options[0]);</pre></td></tr></table></div><p>
+    The return value <tt class="varname">result</tt> will contain either the
+    <tt class="classname">String</tt> object representing the selected text
+    item or <tt class="constant">null</tt> representing no selection.  Any
+    further use of this fragment would have to test the value of
+    <tt class="varname">result</tt> and likely exit from the macro if the value
+    equaled <tt class="constant">null</tt>.
+  </p><p>
+    A set of options can be similarly placed in a
+    <tt class="classname">JComboBox</tt> component created as part of a larger
+    dialog or <tt class="function">showMessageDialog()</tt> layout.  Here are some
+    code fragments showing this approach:
+  </p><div class="informalexample"><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">// fragments from Display_Abbreviations.bsh
+// import statements and other code omitted
+
+// from main routine, this method call returns an array
+// of Strings representing the names of abbreviation sets
+
+abbrevSets = getActiveSets();
+
+...
+
+// from showAbbrevs() method
+
+combo = new JComboBox(abbrevSets);
+// set width to uniform size regardless of combobox contents
+Dimension dim = combo.getPreferredSize();
+dim.width = Math.max(dim.width, 120);
+combo.setPreferredSize(dim);
+combo.setSelectedItem(STARTING_SET); // defined as "global"
+
+// end fragments</pre></td></tr></table></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="macro-tips-single-char"></a>Using a Single Keypress as Input</h3></div></div><div></div></div><p>
+    Some macros may choose to emulate the style of character-based text
+    editors such as <span class="application">emacs</span> or
+    <span class="application">vi</span>. They will require only a single keypress
+    as input that would be handled by the macro but not displayed on the
+    screen. If the keypress corresponds to a character value, jEdit can pass
+    that value as a parameter to a BeanShell script.
+  </p><p>
+    The jEdit class <a href="../api/org/gjt/sp/jedit/gui/InputHandler.html" target="_top">InputHandler</a> is an abstract class
+    that that manages associations between keyboard input and editing
+    actions, along with the recording of macros. Keyboard input
+    in jEdit is normally managed by the derived class
+    <a href="../api/org/gjt/sp/jedit/gui/DefaultInputHandler.html" target="_top">DefaultInputHandler</a>. One of the methods in
+    the <a href="../api/org/gjt/sp/jedit/gui/InputHandler.html" target="_top">InputHandler</a> class handles input from a
+    single keypress:
+  </p><div class="itemizedlist"><ul type="disc"><li><div class="funcsynopsis"><table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0"><tr><td><code class="funcdef">public void <b class="fsfunc">readNextChar</b>(</code></td><td>String  </td><td><var class="pdparam">prompt</var>, </td></tr><tr><td> </td><td>String  </td><td><var class="pdparam">code</var><code>)</code>;</td></tr></table></div></li></ul></div><p>
+    When this method is called, the contents of the <tt class="varname">prompt</tt>
+    parameter is shown in the view's status
+    bar. The method then waits for a key press, after which
+    the contents of the <tt class="varname">code</tt> parameter will be run as
+    a BeanShell script, with one important modification. Each time the
+    string <tt class="varname">__char__</tt> appears in the parameter script, it
+    will be substituted by the character pressed. The key press
+    is &#8220;<span class="quote">consumed</span>&#8221; by <tt class="function">readNextChar()</tt>.
+    It will not be displayed on the screen or otherwise processed by jEdit.
+  </p><p>
+    Using <tt class="function">readNextChar()</tt> requires a macro within the
+    macro, formatted as a single, potentially lengthy string literal. The
+    following macro illustrates this technique. It selects a line of text
+    from the current caret position to the first occurrence of the character
+    next typed by the user. If the character does not appear on the line, no
+    new selection occurs and the display remains unchanged.
+  </p><div class="informalexample"><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">// Next_Char.bsh
+
+script = new StringBuffer(512);
+script.append( "start = textArea.getCaretPosition();"         );
+script.append( "line = textArea.getCaretLine();"              );
+script.append( "end = textArea.getLineEndOffset(line) + 1;"   );
+script.append( "text = buffer.getText(start, end - start);"   );
+script.append( "match = text.indexOf(__char__, 1);"           );
+script.append( "if(match != -1) {"                            );
+script.append(   "if(__char__ != '\\n') ++match;"             );
+script.append(   "textArea.select(start, start + match - 1);" );
+script.append( "}"                                            );
+
+view.getInputHandler().readNextChar("Enter a character",
+    script.toString());
+
+// end Next_Char.bsh</pre></td></tr></table></div><p>
+    Once again, here are a few comments on the macro's design.
+  </p><div class="itemizedlist"><ul type="disc"><li><p>
+        A <tt class="classname">StringBuffer</tt> object is used for efficiency; it
+        obviates multiple creation of fixed-length <tt class="classname">String</tt>
+        objects. The parameter to the constructor of <tt class="varname">script</tt>
+        specifies the initial size of the buffer that will receive the contents
+        of the child script.
+      </p></li><li><p>
+        Besides the quoting of the script code, the formatting of the macro is
+        entirely optional but (hopefully) makes it easier to read.
+      </p></li><li><p>
+        It is important that the child script be self-contained.  It does
+        not run in the same namespace as the &#8220;<span class="quote">parent</span>&#8221; macro
+        <tt class="filename">Next_Char.bsh</tt> and therefore does not share
+        variables, methods, or scripted objects defined in the parent
+        macro.
+      </p></li><li><p>
+        Finally, access to the <a href="../api/org/gjt/sp/jedit/gui/InputHandler.html" target="_top">InputHandler</a> object used
+        by jEdit is available by calling
+        <tt class="function">getInputHandler()</tt> on the current view.
+      </p></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="macro-tips.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="macro-tips.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="startup-scripts.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 15. Macro Tips and Techniques </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Startup Scripts</td></tr></table></div></body></html>

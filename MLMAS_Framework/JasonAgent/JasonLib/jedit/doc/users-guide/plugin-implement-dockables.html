@@ -1,0 +1,38 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>The Dockable Window Catalog</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="plugin-implement.html" title="Chapter 18. Implementing a Simple Plugin"><link rel="previous" href="plugin-implement-actions.html" title="The Action Catalog"><link rel="next" href="plugin-implement-quicknotepad.html" title="The QuickNotepad Class"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The Dockable Window Catalog</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="plugin-implement-actions.html">Prev</a> </td><th width="60%" align="center">Chapter 18. Implementing a Simple Plugin</th><td width="20%" align="right"> <a accesskey="n" href="plugin-implement-quicknotepad.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="plugin-implement-dockables"></a>The Dockable Window Catalog</h2></div></div><div></div></div><p>
+  The jEdit plugin API uses BeanShell to create the top-level visible container
+  of a plugin's interface.  The BeanShell code is contained in a file named
+  <tt class="filename">dockables.xml</tt>.  It usually is quite short, providing only
+  a single BeanShell expression used to create a visible plugin window.
+</p><p>
+  The following example from the QuickNotepad plugin illustrates the
+  requirements of the data file:
+</p><div class="informalexample"><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">&lt;?xml version="1.0"?&gt;
+
+&lt;!DOCTYPE DOCKABLES SYSTEM "dockables.dtd"&gt;
+
+&lt;DOCKABLES&gt;
+	&lt;DOCKABLE NAME="quicknotepad"&gt;
+		new QuickNotepad(view, position);
+	&lt;/DOCKABLE&gt;
+&lt;/DOCKABLES&gt;</pre></td></tr></table></div><p>
+
+In this example, the <tt class="classname">&lt;DOCKABLE&gt;</tt> element has
+a single attribute, the dockable window's identifier. This attribute is
+used to key a property where the window title is stored; see
+<a href="plugin-implement-properties.html" title="The Property File">the section called &#8220;The Property File&#8221;</a>.
+
+</p><p>
+
+The contents of the <tt class="classname">&lt;DOCKABLE&gt;</tt> element itself is a
+BeanShell expression that constructs a new <tt class="classname">QuickNotepad</tt>
+object.  The <tt class="varname">view</tt> and <tt class="varname">position</tt> are
+predefined by the plugin API as the view in which the plugin window will reside,
+and the docking position of the plugin.
+
+</p><p>
+  A formal description of each element of the
+  <tt class="filename">dockables.xml</tt> file can be found in the
+  documentation of the
+  <a href="../api/org/gjt/sp/jedit/gui/DockableWindowManager.html" target="_top">
+  <tt class="classname">DockableWindowManager</tt></a> class.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="plugin-implement-actions.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="plugin-implement.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="plugin-implement-quicknotepad.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">The Action Catalog </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> The QuickNotepad Class</td></tr></table></div></body></html>

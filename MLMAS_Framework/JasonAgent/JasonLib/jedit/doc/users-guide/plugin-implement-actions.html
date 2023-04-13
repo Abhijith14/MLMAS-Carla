@@ -1,0 +1,76 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>The Action Catalog</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="plugin-implement.html" title="Chapter 18. Implementing a Simple Plugin"><link rel="previous" href="plugin-implement-properties.html" title="The Property File"><link rel="next" href="plugin-implement-dockables.html" title="The Dockable Window Catalog"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The Action Catalog</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="plugin-implement-properties.html">Prev</a> </td><th width="60%" align="center">Chapter 18. Implementing a Simple Plugin</th><td width="20%" align="right"> <a accesskey="n" href="plugin-implement-dockables.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="plugin-implement-actions"></a>The Action Catalog</h2></div></div><div></div></div><p>
+  Actions define procedures that can be bound to a menu
+  item, a toolbar button or a keyboard shortcut. Actions are short
+  scripts written in BeanShell, jEdit's macro scripting
+  language.  These scripts either direct the action themselves,
+  delegate to a method in one of the plugin's classes that
+  encapsulates the action, or do a little of both.  The scripts are
+  usually short; elaborate action protocols are usually contained in
+  compiled code, rather than an interpreted macro script, to speed
+  execution.
+</p><p>
+  Actions are defined by creating an XML file entitled
+  <tt class="filename">actions.xml</tt> and placing it in the plugin JAR
+  file.
+</p><p>
+  The <tt class="filename">actions.xml</tt>
+  file from the <span class="application">QuickNotepad</span> plugin looks
+  as follows:
+</p><div class="informalexample"><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">&lt;?xml version="1.0"?&gt;
+
+&lt;!DOCTYPE ACTIONS SYSTEM "actions.dtd"&gt;
+
+&lt;ACTIONS&gt;
+    &lt;ACTION NAME="quicknotepad.choose-file"&gt;
+        &lt;CODE&gt;
+            wm.getDockable(QuickNotepadPlugin.NAME).chooseFile();
+        &lt;/CODE&gt;
+    &lt;/ACTION&gt;
+
+    &lt;ACTION NAME="quicknotepad.save-file"&gt;
+        &lt;CODE&gt;
+            wm.getDockable(QuickNotepadPlugin.NAME).saveFile();
+        &lt;/CODE&gt;
+    &lt;/ACTION&gt;
+
+    &lt;ACTION NAME="quicknotepad.copy-to-buffer"&gt;
+        &lt;CODE&gt;
+            wm.getDockable(QuickNotepadPlugin.NAME).copyToBuffer();
+        &lt;/CODE&gt;
+    &lt;/ACTION&gt;
+&lt;/ACTIONS&gt;</pre></td></tr></table></div><p>
+  This file defines three actions. They use the current view's
+  <a href="../api/org/gjt/sp/jedit/gui/DockableWindowManager.html" target="_top">
+  <tt class="classname">DockableWindowManager</tt></a> object and the method
+  <tt class="filename">getDockable()</tt> to find the QuickNotepad plugin
+  window and call the desired method.
+</p><p>
+  When an action is invoked, the BeanShell scripts address
+  the plugin through static methods, or if instance data is needed, the
+  current <a href="../api/org/gjt/sp/jedit/View.html" target="_top">
+  <tt class="classname">View</tt></a>, its
+  <a href="../api/org/gjt/sp/jedit/gui/DockableWindowManager.html" target="_top">
+  <tt class="classname">DockableWindowManager</tt></a>, and the plugin
+  object return by the <tt class="filename">getDockable()</tt> method.
+</p><p>
+  If you are unfamiliar with BeanShell code, you may nevertheless notice
+  that the code statements bear a strong resemblance to Java code, with
+  one exception: the
+  variable <tt class="varname">view</tt> is never assigned any value.
+</p><p>
+  For complete answers to this and other BeanShell
+  mysteries, see <a href="writing-macros-part.html" title="Part III. Writing Macros">Part III, &#8220;Writing Macros&#8221;</a>; two
+  observations will suffice here. First, the variable
+  <tt class="varname">view</tt> is predefined by jEdit's implementation of
+  BeanShell to refer to the current <tt class="classname">View</tt> object.
+  Second, the
+  BeanShell scripting language is based upon Java syntax, but allows
+  variables to be typed at run time, so explicit types for variables
+  need not be declared.
+</p><p>
+  A formal description of each element of the
+  <tt class="filename">actions.xml</tt> file can be found in the
+  documentation of the
+  <a href="../api/org/gjt/sp/jedit/ActionSet.html" target="_top">
+  <tt class="classname">ActionSet</tt></a> class.
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="plugin-implement-properties.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="plugin-implement.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="plugin-implement-dockables.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">The Property File </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> The Dockable Window Catalog</td></tr></table></div></body></html>

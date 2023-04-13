@@ -1,0 +1,29 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>BeanShell</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="What's New in jEdit 4.2"><link rel="up" href="api-changes.html" title="Chapter 2. API Changes"><link rel="previous" href="api-changes.html" title="Chapter 2. API Changes"><link rel="next" href="plugin-api.html" title="Dynamic Plugin Loading"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">BeanShell</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="api-changes.html">Prev</a> </td><th width="60%" align="center">Chapter 2. API Changes</th><td width="20%" align="right"> <a accesskey="n" href="plugin-api.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="beanshell"></a>BeanShell</h2></div></div><div></div></div><p>
+		BeanShell has been updated from version 1.2b7 to 2.0b1. The
+		new release of BeanShell brings support for scripted
+		classes, static imports, mixins, better
+		error reporting, improved performance, and various fixes.
+	</p><p>
+		A number of jEdit-specific changes are also present in this
+		BeanShell version; they will eventually be merged back into
+		the main BeanShell source tree.
+	</p><p>
+		A new preset BeanShell variable, <tt class="varname">wm</tt> is set to the
+		<tt class="function">view.getDockableWindowManager()</tt>.
+	</p><p>
+		Previously plugins that wanted to provide BeanShell scripting
+		commands had to source a BeanShell script on startup. This was
+		slow. Now, BeanShell supports a &#8220;<span class="quote">command path</span>&#8221;.
+		When an unresolved method name is entered, the command path is
+		consulted for the method definition. Entries are added to the
+		command path using the following method of the
+		<a href="../api/org/gjt/sp/jedit/NameSpace.html" target="_top">NameSpace</a>
+		class:
+	</p><p>
+		</p><div class="funcsynopsis"><p><code class="funcdef">void <b class="fsfunc">addCommandPath</b>(</code>String <var class="pdparam">path</var>, Class <var class="pdparam">clas</var><code>)</code>;</p></div><p>
+	</p><p>
+		For example, if your plugin provides commands in the
+		<tt class="filename">commands</tt> directory of the JAR file, you
+		could call something like this:
+	</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">BeanShell.getNameSpace().addCommandPath("/commands/",
+    MyPlugin.class);</pre></td></tr></table></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="api-changes.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="api-changes.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="plugin-api.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 2. API Changes </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Dynamic Plugin Loading</td></tr></table></div></body></html>

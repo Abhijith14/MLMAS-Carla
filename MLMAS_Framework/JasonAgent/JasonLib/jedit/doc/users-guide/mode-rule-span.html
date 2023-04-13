@@ -1,0 +1,55 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>The SPAN Tag</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="writing-modes.html" title="Chapter 10. Mode Definition Syntax"><link rel="previous" href="mode-rule-terminate.html" title="The TERMINATE Tag"><link rel="next" href="mode-rule-span-regexp.html" title="The SPAN_REGEXP Tag"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The SPAN Tag</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mode-rule-terminate.html">Prev</a> </td><th width="60%" align="center">Chapter 10. Mode Definition Syntax</th><td width="20%" align="right"> <a accesskey="n" href="mode-rule-span-regexp.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mode-rule-span"></a>The SPAN Tag</h2></div></div><div></div></div><p>
+   The <tt class="literal">SPAN</tt> rule, which must be placed inside a
+   <tt class="literal">RULES</tt> tag, highlights text between a start
+   and end string. The start and end strings are specified inside
+   child elements of the <tt class="literal">SPAN</tt> tag.
+   The following attributes are supported:
+  </p><div class="itemizedlist"><ul type="disc"><li><p><tt class="literal">TYPE</tt> - The token type to highlight the
+   span with. See <a href="mode-syntax-tokens.html" title="Token Types">the section called &#8220;Token Types&#8221;</a> for a list of token
+   types.</p></li><li><p><tt class="literal">AT_LINE_START</tt> - If set to
+   <tt class="literal">TRUE</tt>, the span will only be highlighted if the start
+   sequence occurs at the beginning of a line.</p></li><li><p><tt class="literal">AT_WHITESPACE_END</tt> - If set to
+   <tt class="literal">TRUE</tt>, the span will only be highlighted if the
+   start sequence is the first non-whitespace text in the line.</p></li><li><p><tt class="literal">AT_WORD_START</tt> - If set to
+   <tt class="literal">TRUE</tt>, the span will only be highlighted if the start
+   sequence occurs at the beginning of a word.</p></li><li><p><tt class="literal">DELEGATE</tt> - text inside the span will be
+   highlighted with the specified ruleset. To delegate to a ruleset defined
+   in the current mode, just specify its name. To delegate to a ruleset
+   defined in another mode, specify a name of the form
+   <tt class="literal"><i class="replaceable"><tt>mode</tt></i>::<i class="replaceable"><tt>ruleset</tt></i></tt>.
+   Note that the first (unnamed) ruleset in a mode is called
+   &#8220;<span class="quote">MAIN</span>&#8221;.</p></li><li><p><tt class="literal">EXCLUDE_MATCH</tt> - If set to
+   <tt class="literal">TRUE</tt>, the start and end sequences will not be highlighted,
+   only the text between them will.</p></li><li><p><tt class="literal">NO_ESCAPE</tt> - If set to
+   <tt class="literal">TRUE</tt>, the ruleset's escape character will have no
+   effect before the span's end string. Otherwise, the presence of the escape
+   character will cause that occurrence of the end string to be ignored.</p></li><li><p><tt class="literal">NO_LINE_BREAK</tt> - If set to
+   <tt class="literal">TRUE</tt>, the span will not cross line breaks.</p></li><li><p><tt class="literal">NO_WORD_BREAK</tt> - If set to
+   <tt class="literal">TRUE</tt>, the span will not cross word breaks.</p></li></ul></div><p>
+   Note that the <tt class="literal">AT_LINE_START</tt>,
+   <tt class="literal">AT_WHITESPACE_END</tt> and
+   <tt class="literal">AT_WORD_START</tt> attributes can also be used on the
+   <tt class="literal">BEGIN</tt> and <tt class="literal">END</tt> elements. Setting these
+   attributes to the same value on both elements has the same effect as
+   setting them on the <tt class="literal">SPAN</tt> element.
+  </p><p>
+   Here is a <tt class="literal">SPAN</tt> that highlights Java string literals,
+   which cannot include line breaks:
+  </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">&lt;SPAN TYPE="LITERAL1" NO_LINE_BREAK="TRUE"&gt;
+  &lt;BEGIN&gt;"&lt;/BEGIN&gt;
+  &lt;END&gt;"&lt;/END&gt;
+&lt;/SPAN&gt;</pre></td></tr></table><p>
+   Here is a <tt class="literal">SPAN</tt> that highlights Java documentation
+   comments by delegating to the &#8220;<span class="quote">JAVADOC</span>&#8221; ruleset defined
+   elsewhere in the current mode:
+  </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">&lt;SPAN TYPE="COMMENT2" DELEGATE="JAVADOC"&gt;
+  &lt;BEGIN&gt;/**&lt;/BEGIN&gt;
+  &lt;END&gt;*/&lt;/END&gt;
+&lt;/SPAN&gt;</pre></td></tr></table><p>
+   Here is a <tt class="literal">SPAN</tt> that highlights HTML cascading stylesheets
+   inside <tt class="literal">&lt;STYLE&gt;</tt> tags by delegating to the main
+   ruleset in the CSS edit mode:
+  </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">&lt;SPAN TYPE="MARKUP" DELEGATE="css::MAIN"&gt;
+  &lt;BEGIN&gt;&amp;lt;style&amp;gt;&lt;/BEGIN&gt;
+  &lt;END&gt;&amp;lt;/style&amp;gt;&lt;/END&gt;
+&lt;/SPAN&gt;</pre></td></tr></table></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mode-rule-terminate.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="writing-modes.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="mode-rule-span-regexp.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">The TERMINATE Tag </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> The SPAN_REGEXP Tag</td></tr></table></div></body></html>

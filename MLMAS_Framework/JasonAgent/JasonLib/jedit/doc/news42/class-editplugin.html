@@ -1,0 +1,60 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>EditPlugin Class Changes</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="What's New in jEdit 4.2"><link rel="up" href="api-changes.html" title="Chapter 2. API Changes"><link rel="previous" href="plugin-api.html" title="Dynamic Plugin Loading"><link rel="next" href="actions.html" title="Actions"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">EditPlugin Class Changes</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="plugin-api.html">Prev</a> </td><th width="60%" align="center">Chapter 2. API Changes</th><td width="20%" align="right"> <a accesskey="n" href="actions.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="class-editplugin"></a>EditPlugin Class Changes</h2></div></div><div></div></div><p>
+		Documentation for the properties mentioned below, and their possible values,
+		can be found in the
+		documentation for the <a href="../api/org/gjt/sp/jedit/EditPlugin.html" target="_top">EditPlugin</a> class.
+	</p><p>
+		jEdit distinguishes between jEdit 4.1 and 4.2-style plugins by checking
+		for the presence of a single property,
+		<tt class="property">plugin.<i class="replaceable"><tt>class
+		name</tt></i>.activate</tt>. If this property is present, the
+		plugin is loaded using the new API.
+	</p><p>
+		Since the plugin's menu might need to be displayed before its core class
+		is fully loaded, there is a new way of specifying the plugin menu using
+		properties; the <tt class="function">createMenuItems()</tt> method of the
+		<a href="../api/org/gjt/sp/jedit/EditPlugin.html" target="_top">EditPlugin</a>
+		class has been deprecated.
+	</p><p>
+		For example, the jEdit 4.1 version of the QuickNotepad plugin had the
+		following <tt class="function">createMenuItems()</tt> method:
+	</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">public void createMenuItems(Vector menuItems)
+{
+    menuItems.addElement(GUIUtilities.loadMenu("quicknotepad.menu"));
+}</pre></td></tr></table><p>
+		Additionally, the following two properties were defined in
+		<tt class="filename">QuickNotepad.props</tt>:
+	</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">quicknotepad.menu.label=QuickNotepad
+quicknotepad.menu=quicknotepad - quicknotepad.choose-file \
+    quicknotepad.save-file quicknotepad.copy-to-buffer</pre></td></tr></table><p>
+		The jEdit 4.2 version of this plugin no longer has a
+		<tt class="function">createMenuItems()</tt> method, and instead defines the
+		following property:
+	</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">plugin.QuickNotepadPlugin.menu=quicknotepad \
+    - \
+    quicknotepad.choose-file \
+    quicknotepad.save-file \
+    quicknotepad.copy-to-buffer</pre></td></tr></table><p>
+		Note that specifying a <tt class="property">.label</tt> property for the menu
+		is no longer necessary, as the label becomes the name of the plugin.
+	</p><p>
+		If the content of your plugin's menu is determined at runtime, you must
+		use the new dynamic menu API by defining a property like so:
+	</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">plugin.MyPlugin.menu.code=new MyPluginMenuProvider();</pre></td></tr></table><p>
+		The value of the property is a BeanShell snippet that should evaluate to a
+		<a href="../api/org/gjt/sp/jedit/menu/DynamicMenuProvider.html" target="_top">DynamicMenuProvider</a>
+		instance.
+	</p><p>
+		Similarly, option panes should are now specified using properties, and
+		the <tt class="function">createOptionPanes()</tt> method of the
+		<a href="../api/org/gjt/sp/jedit/EditPlugin.html" target="_top">EditPlugin</a>
+		class has been deprecated.
+	</p><p>
+		In QuickNotepad's case, the <tt class="function">createOptionPanes()</tt>
+		method has been removed:
+	</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">public void createOptionPanes(OptionsDialog od)
+    {
+        od.addOptionPane(new QuickNotepadOptionPane());
+    }</pre></td></tr></table><p>
+		The new properties look like this:
+	</p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">plugin.QuickNotepadPlugin.option-pane=quicknotepad
+options.quicknotepad.code=new QuickNotepadOptionPane();</pre></td></tr></table></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="plugin-api.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="api-changes.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="actions.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Dynamic Plugin Loading </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Actions</td></tr></table></div></body></html>

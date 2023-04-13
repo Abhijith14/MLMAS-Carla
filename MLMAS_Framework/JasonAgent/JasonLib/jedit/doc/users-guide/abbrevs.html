@@ -1,0 +1,52 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Abbreviations</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="source-edit.html" title="Chapter 6. Editing Source Code"><link rel="previous" href="bracket-matching.html" title="Bracket Matching"><link rel="next" href="folding.html" title="Folding"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Abbreviations</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="bracket-matching.html">Prev</a> </td><th width="60%" align="center">Chapter 6. Editing Source Code</th><td width="20%" align="right"> <a accesskey="n" href="folding.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="abbrevs"></a>Abbreviations</h2></div></div><div></div></div><p>
+   Using abbreviations reduces the time spent typing long but commonly used
+   strings. For example, in Java mode, the abbreviation &#8220;<span class="quote">sout</span>&#8221; is
+   defined to expand to &#8220;<span class="quote">System.out.println()</span>&#8221;, so to insert
+   &#8220;<span class="quote">System.out.println()</span>&#8221; in a Java buffer, you only need to type
+   &#8220;<span class="quote">sout</span>&#8221; followed by <tt class="keycap">C+;</tt>.
+   An abbreviation can either be global, in which case it can be used in all
+   edit modes, or specific to a single mode.
+  </p><p>
+   Abbreviations can be edited in the <span><b class="guibutton">Abbreviations</b></span> pane of the
+   <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>
+   dialog box; see <a href="global-opts.html#abbrevs-pane" title="The Abbreviations Pane">the section called &#8220;The Abbreviations Pane&#8221;</a>. The Java, VHDL. XML and XSL edit
+   modes include some pre-defined abbreviations you might find useful. Other
+   modes do not have any abbreviations defined by default.
+  </p><p>
+   <span><b class="guimenu">Edit</b></span>&gt;<span><b class="guimenuitem">Expand Abbreviation</b></span>
+   (keyboard shortcut: <tt class="keycap">C+;</tt>)
+   attempts to expand the abbreviation named by the word before the caret.
+   If no expansion could be found, it will offer to define one.
+  </p><p>
+   Automatic abbreviation expansion can be enabled in the
+   <span><b class="guibutton">Abbreviations</b></span> pane of the
+   <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>
+   dialog box. If enabled, pressing the
+   space bar after entering an
+   abbreviation will automatically expand it.
+  </p><p>
+   If automatic expansion
+   is enabled, a space can be inserted without expanding the word before
+   the caret by pressing
+   <tt class="keycap">Control</tt>-<tt class="keycap">E</tt>
+   <tt class="keycap">V</tt> <tt class="keycap">Space</tt>.
+  </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="positional-params"></a>Positional Parameters</h3></div></div><div></div></div><p>
+    Positional parameters are an advanced feature that make abbreviations much
+    more useful. The best way to describe them is with an example.
+   </p><p>
+    Java mode defines an abbreviation &#8220;<span class="quote">F</span>&#8221; that is set to expand to
+    the following:
+   </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">for(int $1 = 0; $1 &lt; $2; $1++)</pre></td></tr></table><p>
+    Expanding <tt class="literal">F#j#array.length#</tt> will insert the following
+    text into the buffer:
+   </p><table border="0" bgcolor="#E0E0E0"><tr><td><pre class="programlisting">for(int j = 0; j &lt; array.length; j++)</pre></td></tr></table><p>
+    Expansions can contain up to nine positional parameters. Note that a
+    trailing hash character (&#8220;<span class="quote">#</span>&#8221;) must be entered when expanding an
+    abbreviation with parameters.
+   </p><p>
+    If you do not specify the correct number of positional parameters when
+    expanding an abbreviation, any missing parameters will be
+    blank in the expansion, and extra parameters will be ignored.
+    A status bar message will be shown stating
+    the required number of parameters.
+   </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="bracket-matching.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="source-edit.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="folding.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Bracket Matching </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Folding</td></tr></table></div></body></html>

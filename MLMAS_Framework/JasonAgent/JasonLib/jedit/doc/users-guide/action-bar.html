@@ -1,0 +1,38 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>The Action Bar</title><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="jEdit 4.2 User's Guide"><link rel="up" href="basics.html" title="Chapter 3. jEdit Basics"><link rel="previous" href="status-bar.html" title="The Status Bar"><link rel="next" href="files.html" title="Chapter 4. Working With Files"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The Action Bar</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="status-bar.html">Prev</a> </td><th width="60%" align="center">Chapter 3. jEdit Basics</th><td width="20%" align="right"> <a accesskey="n" href="files.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="action-bar"></a>The Action Bar</h2></div></div><div></div></div><p>
+   The action bar allows almost any editor feature to be accessed from the keyboard.
+  </p><p>
+   <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Action Bar</b></span> (shortcut: <tt class="keycap">C+ENTER</tt>) displays the action bar at the bottom of the view and gives it keyboard focus. The action bar remembers previously entered strings; see <a href="history.html" title="Appendix C. History Text Fields">Appendix C, <i>History Text Fields</i></a> for details.
+  </p><p>
+   To use the action bar, input a command and press <tt class="keycap">Enter</tt>.
+   The following commands are supported:
+  </p><h3><a name="id2591194"></a>Action invocations</h3><p>
+    Each menu item and tool bar button is bound to an <i class="firstterm">action</i>. To find out the name of an action, invoke the menu item or click the tool bar button, and look in the action bar's history.
+   </p><p>
+    If a substring or an action name is entered, pressing <tt class="keycap">Tab</tt> shows a popup listing matching actions. An action can be selected using the
+    <tt class="keycap">Up</tt> and <tt class="keycap">Down</tt> arrow keys, or by entering more characters of its name.
+   </p><p>
+    Pressing <tt class="keycap">Enter</tt> with an incomplete substring invokes the action that would be first in the completion popup's list.
+   </p><p>
+    For example, entering <b class="userinput"><tt>l-o</tt></b> will match <b class="userinput"><tt>global-options</tt></b>, which has the same effect as invoking <span><b class="guimenu">Utilities</b></span>&gt;<span><b class="guimenuitem">Global Options</b></span>.
+   </p><h3><a name="id2591262"></a>Buffer-local properties</h3><p>
+    Entering <b class="userinput"><tt>buffer.property=value</tt></b> sets the value of the buffer-local property named <b class="userinput"><tt>property</tt></b> to <b class="userinput"><tt>value</tt></b>.
+    Buffer-local properties are documented in <a href="buffer-local.html" title="Buffer-Local Properties">the section called &#8220;Buffer-Local Properties&#8221;</a>.
+   </p><p>
+    For example, entering <b class="userinput"><tt>buffer.tabSize=4</tt></b> changes the current buffer's tab size to 4.
+   </p><p>
+    See <a href="buffer-local.html" title="Buffer-Local Properties">the section called &#8220;Buffer-Local Properties&#8221;</a> for information about buffer-local properties.
+   </p><h3><a name="id2591312"></a>Global properties</h3><p>
+    Entering <b class="userinput"><tt>property=value</tt></b> sets the value of the global property named <b class="userinput"><tt>property</tt></b> to <b class="userinput"><tt>value</tt></b>.
+    This feature is primarily intended to help plugin developers, since the properties jEdit uses to store its settings are not currently documented.
+   </p><h3><a name="id2591337"></a>Command repetition</h3><p>
+   To repeat a command multiple times, enter a number in the action bar, then invoke the command. For example,
+   &#8220;<span class="quote"><tt class="keycap">C+ENTER</tt> <tt class="keycap">1</tt> <tt class="keycap">4</tt>
+   <tt class="keycap">C+d</tt></span>&#8221; will delete
+   14 lines; &#8220;<span class="quote"><tt class="keycap">C+ENTER</tt> <tt class="keycap">9</tt>
+   <tt class="keycap">#</tt></span>&#8221;
+   will insert &#8220;<span class="quote">#########</span>&#8221; in the buffer.
+  </p><p>
+   If you specify a repeat count greater than 20, a confirmation dialog box will
+   be displayed, asking if you really want to perform the action. This prevents
+   you from hanging jEdit by executing a command too many times.
+  </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="status-bar.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="basics.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="files.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">The Status Bar </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 4. Working With Files</td></tr></table></div></body></html>
