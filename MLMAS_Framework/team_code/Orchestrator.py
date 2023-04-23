@@ -1,4 +1,6 @@
 
+import cv2
+import numpy as np
 from jason_carla_bridge import JasonCarlaBridge
 from agents.navigation.basic_agent import BasicAgent
 from leaderboard.autoagents.autonomous_agent import AutonomousAgent
@@ -9,12 +11,14 @@ import os
 import pandas as pd
 import time
 
+try:
+    import pygame
+    from pygame.locals import *
+except ImportError:
+    raise RuntimeError('cannot import pygame, make sure pygame package is installed')
+
 
 ml_agent = os.getenv('ML_MODEL')
-print()
-print("ml_agent:", ml_agent)
-print()
-
 result_file_path = (os.getenv('CHECKPOINT_ENDPOINT').replace(".json","") + "_jason_metrics.csv")
 
 exec(open(ml_agent).read())
@@ -23,6 +27,182 @@ def get_entry_point():
     return 'Orchestrator'
 
 is_print_log_enabled = False  ## enable for # DEBUG
+
+
+
+# class VisionInterface(object):
+
+#     """
+#     Class to view a vehicle cam for debugging purposes
+#     """
+
+#     def __init__(self):
+#         pygame.init()
+#         pygame.font.init()
+
+#         self.screen = pygame.display.set_mode((800, 600))
+#         pygame.display.set_caption("Vision Agent")
+
+#     def start_cam(self, input_data, sensor_name):
+#         """
+#         Run the GUI
+#         """
+
+#         # get sensor data
+
+#         try:
+#             camera_data = input_data[sensor_name]
+            
+#             # Convert camera data to Pygame surface
+#             camera_image = camera_data[1]
+#             camera_image = np.array(camera_image)
+
+#             camera_image = cv2.resize(camera_image, (800, 600))
+
+#             height, width, _ = camera_image.shape
+#             # print("height", height) # 288
+#             # print("width", width) # 256
+#             camera_image = camera_image.reshape((height, width, 4))
+#             # camera_image = camera_image.reshape((800, 600, 4))
+#             camera_image = camera_image[:, :, :3]
+
+#             # Convert BGR to RGB
+#             camera_image = cv2.cvtColor(camera_image, cv2.COLOR_BGR2RGB)
+
+#             camera_surface = pygame.surfarray.make_surface(camera_image.swapaxes(0, 1))
+
+#             # Display sensor data on Pygame screen
+#             self.screen.fill((0, 0, 0))
+#             self.screen.blit(camera_surface, (0, 0))
+#             pygame.display.flip()                       
+#         except Exception as e:
+#             print("Error :", e)
+
+#     # create a destructor
+#     def __del__(self):
+#         pygame.quit()
+
+
+class VisionInterface(object):
+    """
+    Class to view vehicle sensors for debugging purposes
+    """
+
+    def __init__(self):
+        pygame.init()
+        pygame.font.init()
+
+        self.screen_width = 1280
+        self.screen_height = 720
+        self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
+        pygame.display.set_caption("Vision Agent")
+
+        self.font = pygame.font.SysFont("Arial", 18)
+
+        self.sensor_positions = {
+            "RGB_0": (20, 20),
+            "RGB_1": (390, 20),
+            "RGB_2": (750, 20),
+            "TEL_RGB": (20, 360),
+            "LIDAR": (540, 360)
+        }
+
+        # self.sensor_positions = {
+        #     "RGB_0": (20, 20),
+        #     "RGB_1": (100, 20),
+        #     "RGB_2": (200, 20),
+        #     "TEL_RGB": (20, 360),
+        #     "LIDAR": (540, 360)
+        # }
+
+
+    def start_cam(self, input_data, sensor_names):
+        """
+        Run the GUI
+        """
+        # Clear the screen
+        self.screen.fill((0, 0, 0))
+
+        for sensor_name in sensor_names:
+            try:
+                # Get sensor data
+                sensor_data = input_data[sensor_name]
+
+                # Process RGB sensor data
+                if "RGB" in sensor_name:
+                    # Convert camera data to Pygame surface
+                    camera_image = sensor_data[1]
+                    camera_image = np.array(camera_image)
+
+                    # camera_image = cv2.resize(camera_image, (480, 270))
+
+                    height, width, _ = camera_image.shape
+                    camera_image = camera_image.reshape((height, width, 4))
+                    camera_image = camera_image[:, :, :3]
+
+                    # Convert BGR to RGB
+                    camera_image = cv2.cvtColor(camera_image, cv2.COLOR_BGR2RGB)
+
+                    camera_surface = pygame.surfarray.make_surface(camera_image.swapaxes(0, 1))
+
+                    # Display sensor data on Pygame screen
+                    sensor_position = self.sensor_positions[sensor_name]
+                    self.screen.blit(camera_surface, sensor_position)
+
+                # Process TEL_RGB sensor data
+                elif sensor_name == "TEL_RGB":
+                    # Convert TEL_RGB data to Pygame surface
+                    tel_image = sensor_data[1]
+                    tel_image = np.array(tel_image)
+
+                    # tel_image = cv2.resize(tel_image, (480, 270))
+
+                    height, width, _ = tel_image.shape
+                    tel_image = tel_image.reshape((height, width, 4))
+                    tel_image = tel_image[:, :, :3]
+
+                    # Convert BGR to RGB
+                    tel_image = cv2.cvtColor(tel_image, cv2.COLOR_BGR2RGB)
+
+                    tel_surface = pygame.surfarray.make_surface(tel_image.swapaxes(0, 1))
+
+                    # Display sensor data on Pygame screen
+                    sensor_position = self.sensor_positions[sensor_name]
+                    self.screen.blit(tel_surface, sensor_position)
+
+                # Process Lidar sensor data
+                elif sensor_name == "LIDAR":
+                    # Convert Lidar data to Pygame surface
+                    lidar_data = sensor_data[1]
+                    lidar_data = np.array(lidar_data)
+
+                    # lidar_data = cv2.resize(lidar_data, (480, 270))
+
+                    lidar_surface = pygame.surfarray.make_surface(lidar_data.swapaxes(0, 1))
+
+                    # Display sensor data on Pygame screen
+                    sensor_position = self.sensor_positions[sensor_name]
+                    self.screen.blit(lidar_surface, sensor_position)
+
+                # Display sensor name on Pygame screen
+                sensor_name_text = self.font.render(sensor_name, True, (255, 255, 255))
+               
+                sensor_name_position = (sensor_position[0], sensor_position[1] + 280)
+                self.screen.blit(sensor_name_text, sensor_name_position)
+
+            except Exception as e:
+                print("Error :", e)
+
+        # Update Pygame display
+        pygame.display.update()
+
+# create a destructor
+def __del__(self):
+    pygame.quit()
+
+
+
+
 class Orchestrator(AutonomousAgent):
 
     def __init__(self, path_to_conf_file):
@@ -55,6 +235,7 @@ class Orchestrator(AutonomousAgent):
         self.control_repeat = 1
         self.ahead_traffic_light_distance = 0
         self.lidar_df = None
+        self.vic = VisionInterface()
 
     def sensors(self):
 
@@ -165,6 +346,11 @@ class Orchestrator(AutonomousAgent):
         self.traffic_light_detection = self.check_traffic_lights()
         if self.traffic_light_detection != -1 and self.traffic_light_detection[0] == "A":
             self.ahead_traffic_light_distance = self.traffic_light_detection[4]
+
+
+        # print(input_data)
+        
+        self.vic.start_cam(input_data, ['RGB_0', 'RGB_1', 'RGB_2', 'TEL_RGB', 'LIDAR'])
 
 
         self.ml_control = (self.ml_model.run_step(input_data, timestamp) if self.should_get_ml_control()
