@@ -18,8 +18,8 @@ set PYTHONPATH=%PYTHONPATH%;ML_Models/LAV/team_code
 REM ===========================
 REM The Scenario Routes configuration
 REM ===========================
-set ROUTES=leaderboard/data/longest6/longest6.xml
-set SCENARIOS=leaderboard/data/longest6/eval_scenarios.json
+set ROUTES=leaderboard/data/routes_training.xml
+@REM set SCENARIOS=leaderboard/data/longest6/eval_scenarios.json
 
 REM ===========================
 REM The storing location of the results and the records
