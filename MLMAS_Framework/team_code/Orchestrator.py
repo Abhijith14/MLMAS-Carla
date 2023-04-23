@@ -1,21 +1,13 @@
 
-import cv2
-import numpy as np
 from jason_carla_bridge import JasonCarlaBridge
 from agents.navigation.basic_agent import BasicAgent
 from leaderboard.autoagents.autonomous_agent import AutonomousAgent
-from agents.tools.misc import is_within_distance_ahead
+# from agents.tools.misc import is_within_distance_ahead
 from srunner.scenariomanager.carla_data_provider import CarlaDataProvider
 import math
 import os
 import pandas as pd
 import time
-
-try:
-    import pygame
-    from pygame.locals import *
-except ImportError:
-    raise RuntimeError('cannot import pygame, make sure pygame package is installed')
 
 
 ml_agent = os.getenv('ML_MODEL')
@@ -27,187 +19,21 @@ def get_entry_point():
     return 'Orchestrator'
 
 is_print_log_enabled = False  ## enable for # DEBUG
-
-
-
-# class VisionInterface(object):
-
-#     """
-#     Class to view a vehicle cam for debugging purposes
-#     """
-
-#     def __init__(self):
-#         pygame.init()
-#         pygame.font.init()
-
-#         self.screen = pygame.display.set_mode((800, 600))
-#         pygame.display.set_caption("Vision Agent")
-
-#     def start_cam(self, input_data, sensor_name):
-#         """
-#         Run the GUI
-#         """
-
-#         # get sensor data
-
-#         try:
-#             camera_data = input_data[sensor_name]
-            
-#             # Convert camera data to Pygame surface
-#             camera_image = camera_data[1]
-#             camera_image = np.array(camera_image)
-
-#             camera_image = cv2.resize(camera_image, (800, 600))
-
-#             height, width, _ = camera_image.shape
-#             # print("height", height) # 288
-#             # print("width", width) # 256
-#             camera_image = camera_image.reshape((height, width, 4))
-#             # camera_image = camera_image.reshape((800, 600, 4))
-#             camera_image = camera_image[:, :, :3]
-
-#             # Convert BGR to RGB
-#             camera_image = cv2.cvtColor(camera_image, cv2.COLOR_BGR2RGB)
-
-#             camera_surface = pygame.surfarray.make_surface(camera_image.swapaxes(0, 1))
-
-#             # Display sensor data on Pygame screen
-#             self.screen.fill((0, 0, 0))
-#             self.screen.blit(camera_surface, (0, 0))
-#             pygame.display.flip()                       
-#         except Exception as e:
-#             print("Error :", e)
-
-#     # create a destructor
-#     def __del__(self):
-#         pygame.quit()
-
-
-class VisionInterface(object):
-    """
-    Class to view vehicle sensors for debugging purposes
-    """
-
-    def __init__(self):
-        pygame.init()
-        pygame.font.init()
-
-        self.screen_width = 1280
-        self.screen_height = 720
-        self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
-        pygame.display.set_caption("Vision Agent")
-
-        self.font = pygame.font.SysFont("Arial", 18)
-
-        self.sensor_positions = {
-            "RGB_0": (20, 20),
-            "RGB_1": (390, 20),
-            "RGB_2": (750, 20),
-            "TEL_RGB": (20, 360),
-            "LIDAR": (540, 360)
-        }
-
-        # self.sensor_positions = {
-        #     "RGB_0": (20, 20),
-        #     "RGB_1": (100, 20),
-        #     "RGB_2": (200, 20),
-        #     "TEL_RGB": (20, 360),
-        #     "LIDAR": (540, 360)
-        # }
-
-
-    def start_cam(self, input_data, sensor_names):
-        """
-        Run the GUI
-        """
-        # Clear the screen
-        self.screen.fill((0, 0, 0))
-
-        for sensor_name in sensor_names:
-            try:
-                # Get sensor data
-                sensor_data = input_data[sensor_name]
-
-                # Process RGB sensor data
-                if "RGB" in sensor_name:
-                    # Convert camera data to Pygame surface
-                    camera_image = sensor_data[1]
-                    camera_image = np.array(camera_image)
-
-                    # camera_image = cv2.resize(camera_image, (480, 270))
-
-                    height, width, _ = camera_image.shape
-                    camera_image = camera_image.reshape((height, width, 4))
-                    camera_image = camera_image[:, :, :3]
-
-                    # Convert BGR to RGB
-                    camera_image = cv2.cvtColor(camera_image, cv2.COLOR_BGR2RGB)
-
-                    camera_surface = pygame.surfarray.make_surface(camera_image.swapaxes(0, 1))
-
-                    # Display sensor data on Pygame screen
-                    sensor_position = self.sensor_positions[sensor_name]
-                    self.screen.blit(camera_surface, sensor_position)
-
-                # Process TEL_RGB sensor data
-                elif sensor_name == "TEL_RGB":
-                    # Convert TEL_RGB data to Pygame surface
-                    tel_image = sensor_data[1]
-                    tel_image = np.array(tel_image)
-
-                    # tel_image = cv2.resize(tel_image, (480, 270))
-
-                    height, width, _ = tel_image.shape
-                    tel_image = tel_image.reshape((height, width, 4))
-                    tel_image = tel_image[:, :, :3]
-
-                    # Convert BGR to RGB
-                    tel_image = cv2.cvtColor(tel_image, cv2.COLOR_BGR2RGB)
-
-                    tel_surface = pygame.surfarray.make_surface(tel_image.swapaxes(0, 1))
-
-                    # Display sensor data on Pygame screen
-                    sensor_position = self.sensor_positions[sensor_name]
-                    self.screen.blit(tel_surface, sensor_position)
-
-                # Process Lidar sensor data
-                elif sensor_name == "LIDAR":
-                    # Convert Lidar data to Pygame surface
-                    lidar_data = sensor_data[1]
-                    lidar_data = np.array(lidar_data)
-
-                    # lidar_data = cv2.resize(lidar_data, (480, 270))
-
-                    lidar_surface = pygame.surfarray.make_surface(lidar_data.swapaxes(0, 1))
-
-                    # Display sensor data on Pygame screen
-                    sensor_position = self.sensor_positions[sensor_name]
-                    self.screen.blit(lidar_surface, sensor_position)
-
-                # Display sensor name on Pygame screen
-                sensor_name_text = self.font.render(sensor_name, True, (255, 255, 255))
-               
-                sensor_name_position = (sensor_position[0], sensor_position[1] + 280)
-                self.screen.blit(sensor_name_text, sensor_name_position)
-
-            except Exception as e:
-                print("Error :", e)
-
-        # Update Pygame display
-        pygame.display.update()
-
-# create a destructor
-def __del__(self):
-    pygame.quit()
-
-
-
-
 class Orchestrator(AutonomousAgent):
 
-    def __init__(self, path_to_conf_file):
+    def __init__(self, carla_host, carla_port, debug=False):
+        super(Orchestrator, self).__init__(carla_host, carla_port, debug)
+        
+        path_to_conf_file = os.getenv('TEAM_CONFIG')
+
         ml_class = eval(class_name)
-        self.ml_model = ml_class(path_to_conf_file)
+
+        print("ML model class:", ml_class)
+        print("ML model path:", path_to_conf_file)
+        print("Class name:", class_name)
+
+        # self.ml_model = ml_class(path_to_conf_file)
+        self.ml_model = ml_class(carla_host, carla_port, debug)
         #  current global plans to reach a destination
         self.num_frames = 0
         self._global_plan_world_coord = self.ml_model._global_plan_world_coord
@@ -235,7 +61,6 @@ class Orchestrator(AutonomousAgent):
         self.control_repeat = 1
         self.ahead_traffic_light_distance = 0
         self.lidar_df = None
-        self.vic = VisionInterface()
 
     def sensors(self):
 
@@ -346,11 +171,6 @@ class Orchestrator(AutonomousAgent):
         self.traffic_light_detection = self.check_traffic_lights()
         if self.traffic_light_detection != -1 and self.traffic_light_detection[0] == "A":
             self.ahead_traffic_light_distance = self.traffic_light_detection[4]
-
-
-        # print(input_data)
-        
-        self.vic.start_cam(input_data, ['RGB_0', 'RGB_1', 'RGB_2', 'TEL_RGB', 'LIDAR'])
 
 
         self.ml_control = (self.ml_model.run_step(input_data, timestamp) if self.should_get_ml_control()
@@ -480,7 +300,7 @@ class Orchestrator(AutonomousAgent):
 
     def check_traffic_lights(self):
         traffic_light_list = self.basic_agent._world.get_actors().filter("*traffic_light*")
-        light_state, traffic_light = self._is_at_traffic_light(traffic_light_list)
+        light_state, traffic_light = self.basic_agent._affected_by_traffic_light(traffic_light_list)
         if light_state:
             self._last_traffic_light = traffic_light
             trfc_loc = self._last_traffic_light.get_transform().location
@@ -525,42 +345,42 @@ class Orchestrator(AutonomousAgent):
         return (ego_loc.x > min(x) and ego_loc.x < max(x)
                 and ego_loc.y > min(y) and ego_loc.y < max(y))
 
-    def _is_at_traffic_light(self, lights_list):
-        """
-        Method to check if there is a red light affecting us. This version of
-        the method is compatible with both European and US style traffic lights.
+    # def _is_at_traffic_light(self, lights_list):
+    #     """
+    #     Method to check if there is a red light affecting us. This version of
+    #     the method is compatible with both European and US style traffic lights.
 
-        :param lights_list: list containing TrafficLight objects
-        :return: a tuple given by (bool_flag, traffic_light), where
-                 - bool_flag is True if there is a traffic light in RED
-                   affecting us and False otherwise
-                 - traffic_light is the object itself or None if there is no
-                   red traffic light affecting us
-        """
-        ego_vehicle_location = self._vehicle.get_location()
-        ego_vehicle_waypoint = self.basic_agent._map.get_waypoint(ego_vehicle_location)
+    #     :param lights_list: list containing TrafficLight objects
+    #     :return: a tuple given by (bool_flag, traffic_light), where
+    #              - bool_flag is True if there is a traffic light in RED
+    #                affecting us and False otherwise
+    #              - traffic_light is the object itself or None if there is no
+    #                red traffic light affecting us
+    #     """
+    #     ego_vehicle_location = self._vehicle.get_location()
+    #     ego_vehicle_waypoint = self.basic_agent._map.get_waypoint(ego_vehicle_location)
 
-        for traffic_light in lights_list:
-            object_location = self.basic_agent._get_trafficlight_trigger_location(traffic_light)
-            object_waypoint = self.basic_agent._map.get_waypoint(object_location)
+    #     for traffic_light in lights_list:
+    #         object_location = self.basic_agent._get_trafficlight_trigger_location(traffic_light)
+    #         object_waypoint = self.basic_agent._map.get_waypoint(object_location)
 
-            if object_waypoint.road_id != ego_vehicle_waypoint.road_id:
-                continue
+    #         if object_waypoint.road_id != ego_vehicle_waypoint.road_id:
+    #             continue
 
-            ve_dir = ego_vehicle_waypoint.transform.get_forward_vector()
-            wp_dir = object_waypoint.transform.get_forward_vector()
-            dot_ve_wp = ve_dir.x * wp_dir.x + ve_dir.y * wp_dir.y + ve_dir.z * wp_dir.z
+    #         ve_dir = ego_vehicle_waypoint.transform.get_forward_vector()
+    #         wp_dir = object_waypoint.transform.get_forward_vector()
+    #         dot_ve_wp = ve_dir.x * wp_dir.x + ve_dir.y * wp_dir.y + ve_dir.z * wp_dir.z
 
-            if dot_ve_wp < 0:
-                continue
+    #         if dot_ve_wp < 0:
+    #             continue
 
-            if is_within_distance_ahead(object_waypoint.transform,
-                                        self._vehicle.get_transform(),
-                                        self._proximity_tlight_threshold):
+    #         if is_within_distance_ahead(object_waypoint.transform,
+    #                                     self._vehicle.get_transform(),
+    #                                     self._proximity_tlight_threshold):
 
-                                        return (True, traffic_light)
+    #                                     return (True, traffic_light)
 
-        return (False, None)
+    #     return (False, None)
 
     def send_sensor_data(self):
 
