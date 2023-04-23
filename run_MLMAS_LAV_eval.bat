@@ -2,12 +2,13 @@
 setlocal
 
 call MLMAS_Framework\config_LAV.bat
+@REM set TEAM_CONFIG=
 
-set CARLA_ROOT=CARLA_0.9.14
+set CARLA_ROOT=CARLA_0.9.10.1
 set CARLA_SERVER=%CARLA_ROOT%\CarlaUE4.exe
 set PYTHONPATH=%PYTHONPATH%;%CARLA_ROOT%\PythonAPI
 set PYTHONPATH=%PYTHONPATH%;%CARLA_ROOT%\PythonAPI\carla
-set PYTHONPATH=%PYTHONPATH%;%CARLA_ROOT%\PythonAPI\carla\dist\carla-0.9.14-py3.7-win-amd64.egg
+set PYTHONPATH=%PYTHONPATH%;%CARLA_ROOT%\PythonAPI\carla\dist\carla-0.9.10-py3.7-win-amd64.egg
 set PYTHONPATH=%PYTHONPATH%;leaderboard
 set PYTHONPATH=%PYTHONPATH%;MLMAS_Framework\team_code
 set PYTHONPATH=%PYTHONPATH%;scenario_runner
@@ -20,6 +21,9 @@ set DEBUG_CHALLENGE=0
 set REPETITIONS=1
 
 set TEAM_AGENT=MLMAS_Framework\team_code\Orchestrator.py
+set TEAM_AGENT_human=%LEADERBOARD_ROOT%\leaderboard\autoagents\human_agent.py
+set TEAM_AGENT_npc=%LEADERBOARD_ROOT%\leaderboard\autoagents\npc_agent.py
+
 
 set RESUME=True
 
@@ -46,4 +50,3 @@ python %LEADERBOARD_ROOT%\leaderboard\leaderboard_evaluator.py ^
 if "%run_jason_agent%"=="true" (
   call MLMAS_Framework\JasonAgent\stop_jason.bat
 )
-
