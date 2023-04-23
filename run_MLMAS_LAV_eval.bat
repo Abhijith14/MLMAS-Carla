@@ -4,11 +4,11 @@ setlocal
 call MLMAS_Framework\config_LAV.bat
 @REM set TEAM_CONFIG=
 
-set CARLA_ROOT=CARLA_0.9.10.1
+set CARLA_ROOT=CARLA_0.9.14
 set CARLA_SERVER=%CARLA_ROOT%\CarlaUE4.exe
 set PYTHONPATH=%PYTHONPATH%;%CARLA_ROOT%\PythonAPI
 set PYTHONPATH=%PYTHONPATH%;%CARLA_ROOT%\PythonAPI\carla
-set PYTHONPATH=%PYTHONPATH%;%CARLA_ROOT%\PythonAPI\carla\dist\carla-0.9.10-py3.7-win-amd64.egg
+set PYTHONPATH=%PYTHONPATH%;%CARLA_ROOT%\PythonAPI\carla\dist\carla-0.9.14-py3.7-win-amd64.egg
 set PYTHONPATH=%PYTHONPATH%;leaderboard
 set PYTHONPATH=%PYTHONPATH%;MLMAS_Framework\team_code
 set PYTHONPATH=%PYTHONPATH%;scenario_runner
@@ -22,8 +22,6 @@ set REPETITIONS=1
 
 set TEAM_AGENT=MLMAS_Framework\team_code\Orchestrator.py
 set TEAM_AGENT_human=%LEADERBOARD_ROOT%\leaderboard\autoagents\human_agent.py
-set TEAM_AGENT_npc=%LEADERBOARD_ROOT%\leaderboard\autoagents\npc_agent.py
-
 
 set RESUME=True
 
@@ -33,7 +31,6 @@ if "%run_jason_agent%"=="true" (
 
 
 python %LEADERBOARD_ROOT%\leaderboard\leaderboard_evaluator.py ^
---scenarios=%SCENARIOS% ^
 --routes=%ROUTES% ^
 --repetitions=%REPETITIONS% ^
 --track=%CHALLENGE_TRACK_CODENAME% ^
@@ -43,7 +40,7 @@ python %LEADERBOARD_ROOT%\leaderboard\leaderboard_evaluator.py ^
 --debug=%DEBUG_CHALLENGE% ^
 --resume=%RESUME% ^
 --port=%PORT% ^
---trafficManagerPort=%TM_PORT% ^
+--traffic-manager-port=%TM_PORT% ^
 --record=%RECORD_PATH%
 
 
